@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b6c6d7fe-2093-4d5e-b376-81bcefb0b42c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     matieres_p.`id` AS matieres_p_id,
+     matieres_p.`id_f` AS matieres_p_id_f,
+     matieres_p.`code_barre` AS matieres_p_code_barre,
+     matieres_p.`libelle` AS matieres_p_libelle,
+     matieres_p.`description` AS matieres_p_description,
+     matieres_p.`unite_mesure` AS matieres_p_unite_mesure,
+     matieres_p.`prx_a_unite` AS matieres_p_prx_a_unite,
+     matieres_p.`date_exp` AS matieres_p_date_exp,
+     matieres_p.`condition_livraison` AS matieres_p_condition_livraison,
+     matieres_p.`conservation` AS matieres_p_conservation,
+     matieres_p.`prx_achat` AS matieres_p_prx_achat,
+     matieres_p.`qte_achat` AS matieres_p_qte_achat,
+     matieres_p.`prx_v_unite` AS matieres_p_prx_v_unite,
+     matieres_p.`datecreat` AS matieres_p_datecreat,
+     matieres_p.`admin` AS matieres_p_admin
+FROM
+     `matieres_p` matieres_p]]>
+	</queryString>
+	<field name="matieres_p_id" class="java.lang.Long"/>
+	<field name="matieres_p_id_f" class="java.lang.Integer"/>
+	<field name="matieres_p_code_barre" class="java.lang.String"/>
+	<field name="matieres_p_libelle" class="java.lang.String"/>
+	<field name="matieres_p_description" class="java.lang.String"/>
+	<field name="matieres_p_unite_mesure" class="java.lang.String"/>
+	<field name="matieres_p_prx_a_unite" class="java.lang.Long"/>
+	<field name="matieres_p_date_exp" class="java.lang.String"/>
+	<field name="matieres_p_condition_livraison" class="java.lang.String"/>
+	<field name="matieres_p_conservation" class="java.lang.String"/>
+	<field name="matieres_p_prx_achat" class="java.lang.Double"/>
+	<field name="matieres_p_qte_achat" class="java.lang.Double"/>
+	<field name="matieres_p_prx_v_unite" class="java.lang.Long"/>
+	<field name="matieres_p_datecreat" class="java.lang.String"/>
+	<field name="matieres_p_admin" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="174" y="20" width="248" height="31" uuid="0e916855-662f-4241-90d9-329361cadbc9"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LES MATIERES PRIMAIRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="20" width="63" height="30" uuid="15d1ad1a-b23b-4982-969a-f7a958292380"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ARS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="33" width="89" height="14" uuid="720914f0-a63f-462e-be8f-1c4a5afe33cb"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[DJICORONI PARA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="60" width="89" height="15" uuid="b7004913-54d6-4f31-84c7-161cf3939412"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tél.: 20 22 18 82]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="47" width="89" height="13" uuid="ba986e15-8423-415f-b6ba-65ce0bd9fb52"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[BD MOHAMED VI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="7" width="71" height="13" uuid="b05f0329-84a0-45fa-bf2a-26c1426408be"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIBY CENTER ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="20" width="89" height="13" uuid="4316a0dd-852f-4f26-ae07-e0ccc7e3a564"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[SUPER MARCHE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="2" y="53" width="72" height="28" forecolor="#000000" uuid="95a6a503-0b04-4799-ae10-a0844e460aec"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reference]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="74" y="53" width="123" height="28" forecolor="#000000" uuid="0ce1e3b1-362d-4a9c-9d9a-f292d8f465e6"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code barre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="197" y="53" width="190" height="28" forecolor="#000000" uuid="21ba0b22-8970-4b80-b195-8c00a7bb2745"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="387" y="53" width="83" height="28" forecolor="#000000" uuid="fcacf11b-370f-4f27-82c0-805119f04426"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prix achat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="470" y="53" width="85" height="28" forecolor="#000000" uuid="ee02c19b-279e-4e89-b3c0-412ac4523f1a"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prix vente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="20" width="74" height="20" uuid="71acfc14-9608-4700-8e6a-4b7a16fbdcf9"/>
+				<text><![CDATA[EDITE LE :]]></text>
+			</staticText>
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="207" y="20" width="215" height="20" uuid="a15bb0b2-ad1b-4ba7-9cb0-8507b038bfb7"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="20" width="80" height="20" uuid="0dde6ca8-05c7-4160-843e-b3164a586249"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="513" y="20" width="42" height="20" uuid="e67b3146-38fa-48a7-86f2-7f28cb7b6c44"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="f16aa357-1fcc-448b-b5b3-005b81640156"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="28" y="0" width="46" height="18" uuid="8ddec56d-4d9f-4fe4-9ee3-2726f5ab0f7a"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matieres_p_id}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="74" y="0" width="123" height="18" uuid="f0da7ab7-0cb9-41af-8b33-65fe9676ef3c"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matieres_p_code_barre}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="197" y="0" width="190" height="18" uuid="f50473d8-1b45-414e-a84d-e0b28bc225de"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matieres_p_description}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="411" y="0" width="59" height="18" uuid="59cc7bd4-1ea3-4497-8500-0bcdbb4830ce"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matieres_p_prx_a_unite}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="490" y="0" width="63" height="18" uuid="13687753-4fdd-4bb2-adba-77e8c0af946e"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matieres_p_prx_v_unite}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="830670d3-aa15-4a82-adfe-823870ef930a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="3" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

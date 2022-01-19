@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Remises" table="remises" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="remise1" type="string">
+            <column name="remise1" length="50" />
+        </property>
+        <property name="remise2" type="string">
+            <column name="remise2" length="50" />
+        </property>
+        <property name="remise3" type="string">
+            <column name="remise3" length="50" />
+        </property>
+        <property name="datecreate" type="string">
+            <column name="datecreate" length="50" />
+        </property>
+        <property name="admin" type="string">
+            <column name="admin" />
+        </property>
+    </class>
+</hibernate-mapping>

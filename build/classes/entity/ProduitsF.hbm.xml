@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.ProduitsF" table="produits_f" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="codeBarre" type="string">
+            <column name="code_barre" />
+        </property>
+        <property name="libelle" type="java.lang.Long">
+            <column name="libelle" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <property name="pu" type="java.lang.Long">
+            <column name="pu" />
+        </property>
+        <property name="uniteM" type="string">
+            <column name="unite_m" />
+        </property>
+        <property name="datecreat" type="string">
+            <column name="datecreat" length="50" />
+        </property>
+        <property name="admin" type="string">
+            <column name="admin" />
+        </property>
+        <property name="f" type="string">
+            <column name="f" />
+        </property>
+        <property name="sf" type="string">
+            <column name="sf" />
+        </property>
+        <property name="stockMini" type="java.lang.Integer">
+            <column name="stockMini" />
+        </property>
+        <property name="idf" type="java.lang.Long">
+            <column name="idf" />
+        </property>
+        <property name="idsf" type="java.lang.Long">
+            <column name="idsf" />
+        </property>
+    </class>
+</hibernate-mapping>

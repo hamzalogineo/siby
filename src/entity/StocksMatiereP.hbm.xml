@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.StocksMatiereP" table="stocks_matiere_p" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="codeBarre" type="string">
+            <column name="code_barre" />
+        </property>
+        <property name="matieresP" type="string">
+            <column name="matieres_p" />
+        </property>
+        <property name="uniteMes" type="string">
+            <column name="unite_mes" />
+        </property>
+        <property name="puV" type="java.lang.Double">
+            <column name="pu_v" precision="22" scale="0" />
+        </property>
+        <property name="stockDispo" type="java.lang.Double">
+            <column name="stock_dispo" precision="22" scale="0" />
+        </property>
+        <property name="dateentree" type="string">
+            <column name="dateentree" length="50" />
+        </property>
+        <property name="mois" type="string">
+            <column name="mois" length="50" />
+        </property>
+        <property name="annee" type="string">
+            <column name="annee" length="50" />
+        </property>
+        <property name="admin" type="string">
+            <column name="admin" />
+        </property>
+    </class>
+</hibernate-mapping>

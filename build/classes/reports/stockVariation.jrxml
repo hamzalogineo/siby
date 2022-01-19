@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="stockVariation" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1532c3e-fb46-4d8b-9b55-544c531ef0b3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="299"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="stockVariationData" uuid="c8e43b4b-3c78-4c99-abd8-688f5e0c3d5f">
+		<field name="cb" class="java.lang.String"/>
+		<field name="desi" class="java.lang.String"/>
+		<field name="astock" class="java.lang.Integer"/>
+		<field name="pa" class="java.lang.Integer"/>
+		<field name="pv" class="java.lang.Integer"/>
+		<field name="vpa" class="java.lang.Long"/>
+		<field name="vpv" class="java.lang.Long"/>
+		<field name="dated" class="java.lang.String"/>
+		<field name="datef" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="sql" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="total_vpv" class="java.lang.String"/>
+	<parameter name="total_vpa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="75" splitType="Stretch">
+			<staticText>
+				<reportElement x="319" y="10" width="225" height="37" uuid="b1b3f5e7-2ff7-4e68-825e-999db5ef8a4a"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ETAT DU STOCK ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="4" width="71" height="13" uuid="460ff52c-528b-4be7-bf64-855342864fec"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIBY CENTER ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="30" width="89" height="14" uuid="136683c8-84f8-48db-810c-b799fe38a167"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[DJICORONI PARA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="44" width="89" height="13" uuid="decd5e14-5bee-4e77-97a2-071f9a96141b"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[BD MOHAMED VI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="57" width="89" height="15" uuid="a1f5700d-83d7-4c8a-a8ea-69dc31a152ab"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tél.: 20 22 18 82]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="17" width="89" height="13" uuid="a0124287-9480-41e7-84d0-2b797f3c3592"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[SUPER MARCHE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="679" y="4" width="80" height="13" uuid="b0691180-51e4-495c-a676-8e007be9be1e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="759" y="4" width="40" height="13" uuid="e008bced-a3f2-464a-be15-55946e01712d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="625" y="47" width="174" height="15" uuid="a7019ca8-ce74-491d-9f28-021571c5cd6a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="577" y="47" width="48" height="15" uuid="b3f15bef-5ac5-40f4-bb56-ff6ed85a92d4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edité le ,]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25">
+			<staticText>
+				<reportElement x="380" y="0" width="90" height="23" uuid="6aa4f1e2-ed91-4548-9daa-00b79020eb69"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRIX ACHAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="0" width="197" height="23" uuid="52c1f84e-75a7-41f2-97c5-2fbfbfaa4b81"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPTION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="120" height="23" uuid="5d41b6c5-3f8d-4510-955a-ec3f555bb318"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALEUR STOCK ACHAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="93" height="23" uuid="481e0e89-599a-474b-8bf4-2760e1799b69"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODE BARRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="0" width="90" height="23" uuid="ae271bf3-e6e2-407c-a982-96fcb6efbcc1"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STOCK ACTUEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="590" y="0" width="90" height="23" uuid="beea62e5-4bf0-4750-9540-0ea8d870bd63"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRIX VENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="679" y="0" width="119" height="23" uuid="361a0dbb-5307-41c9-a5ca-495a0bbb170c"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALEUR STOCK VENTE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" x="-3" y="0" width="802" height="26" uuid="1a7d3624-88c3-4d96-aedd-a3d671382e7a"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="stockVariationData" uuid="96cc8210-4859-4a1c-885b-f3799e3e776a">
+						<dataSourceExpression><![CDATA[$P{sql}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="1" uuid="777bf0c5-18c9-4a64-90aa-589966dc34c0">
+						<jr:tableHeader height="1" rowSpan="1"/>
+						<jr:detailCell height="22" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="93" uuid="a3227297-2b2e-4610-841e-a9597c6afc16">
+						<jr:detailCell height="22" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="93" height="22" uuid="40af1d38-a2ef-468f-ae06-008ff2e4ed8c"/>
+								<textFieldExpression><![CDATA[$F{cb}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="197" uuid="223da938-ec23-4360-a298-39e1281f46ba">
+						<jr:detailCell height="22" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="197" height="22" uuid="a2237631-91d2-4250-80fd-a5b3016a9ad4"/>
+								<textFieldExpression><![CDATA[$F{desi}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="2dc4b227-bd94-42a1-b218-b34e9a2bdb85">
+						<jr:detailCell height="22" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="22" uuid="c04cd048-558b-499f-ad2e-938bada2e5d4"/>
+								<textFieldExpression><![CDATA[$F{astock}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="c2f8d45b-1b79-443d-905f-bbaf570aa6e3">
+						<jr:detailCell height="22" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="22" uuid="e792aaa9-28a3-47b7-b554-98a97b466fde"/>
+								<textFieldExpression><![CDATA[$F{pa}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="120" uuid="a722e049-554f-4871-a5ec-793414d94d54">
+						<jr:detailCell height="22" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="120" height="22" uuid="01f8833a-3c37-47d0-a0c4-33fde7382bfb"/>
+								<textFieldExpression><![CDATA[$F{vpa}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="a1374999-c343-47b1-895d-3d29103ae38a">
+						<jr:detailCell height="22" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="22" uuid="fc81df0c-2a6b-4a76-8e09-e34b3204e798"/>
+								<textFieldExpression><![CDATA[$F{pv}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="119" uuid="2dadee31-89af-4f72-a557-62f32728ac46">
+						<jr:detailCell height="22" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="119" height="22" uuid="a5dc17f8-d50a-4176-ad21-4c613493690b"/>
+								<textFieldExpression><![CDATA[$F{vpv}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="25">
+			<staticText>
+				<reportElement x="3" y="0" width="90" height="23" uuid="ab2af268-0544-478d-8052-66c646353b98"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="0" width="120" height="23" uuid="a8c7d6a3-0ad3-4cb0-8306-dc17ac1b206e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total_vpa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="680" y="0" width="119" height="23" uuid="60fae023-f2c0-4eab-9992-3e580517127e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total_vpv}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

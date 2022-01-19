@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.MatieresP" table="matieres_p" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="idF" type="java.lang.Integer">
+            <column name="id_f" />
+        </property>
+        <property name="codeBarre" type="string">
+            <column name="code_barre" />
+        </property>
+        <property name="libelle" type="string">
+            <column name="libelle" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <property name="uniteMesure" type="string">
+            <column name="unite_mesure" />
+        </property>
+        <property name="prxAUnite" type="java.lang.Long">
+            <column name="prx_a_unite" />
+        </property>
+        <property name="dateExp" type="string">
+            <column name="date_exp" length="150" />
+        </property>
+        <property name="conditionLivraison" type="string">
+            <column name="condition_livraison" />
+        </property>
+        <property name="conservation" type="string">
+            <column name="conservation" />
+        </property>
+        <property name="prxAchat" type="java.lang.Double">
+            <column name="prx_achat" precision="22" scale="0" />
+        </property>
+        <property name="qteAchat" type="java.lang.Double">
+            <column name="qte_achat" precision="22" scale="0" />
+        </property>
+        <property name="prxVUnite" type="java.lang.Long">
+            <column name="prx_v_unite" />
+        </property>
+        <property name="datecreat" type="string">
+            <column name="datecreat" length="50" />
+        </property>
+        <property name="admin" type="string">
+            <column name="admin" />
+        </property>
+        <property name="stockMini" type="java.lang.Integer">
+            <column name="stockMini" />
+        </property>
+         <property name="idf" type="java.lang.Long">
+            <column name="idf" />
+        </property>
+         <property name="idsf" type="java.lang.Long">
+            <column name="idsf" />
+        </property>
+    </class>
+</hibernate-mapping>

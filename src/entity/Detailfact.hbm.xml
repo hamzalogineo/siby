@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Detailfact" table="detailfact" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="n" type="java.lang.Integer">
+            <column name="n" />
+        </property>
+        <property name="cl" type="string">
+            <column name="cl" />
+        </property>
+        <property name="desi" type="string">
+            <column name="desi" />
+        </property>
+        <property name="qte" type="java.lang.Long">
+            <column name="qte" />
+        </property>
+        <property name="pu" type="java.lang.Long">
+            <column name="pu" />
+        </property>
+        <property name="montant" type="java.lang.Long">
+            <column name="montant" />
+        </property>
+        <property name="reprise" type="java.lang.Integer">
+            <column name="reprise" />
+        </property>
+    </class>
+</hibernate-mapping>

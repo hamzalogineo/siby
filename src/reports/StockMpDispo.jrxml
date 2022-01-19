@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4bc80986-8ed0-4753-810c-0e6d2ab176d1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     stocks_matiere_p.`id` AS stocks_matiere_p_id,
+     stocks_matiere_p.`code_barre` AS stocks_matiere_p_code_barre,
+     stocks_matiere_p.`matieres_p` AS stocks_matiere_p_matieres_p,
+     stocks_matiere_p.`unite_mes` AS stocks_matiere_p_unite_mes,
+     stocks_matiere_p.`pu_v` AS stocks_matiere_p_pu_v,
+     stocks_matiere_p.`stock_dispo` AS stocks_matiere_p_stock_dispo,
+     stocks_matiere_p.`dateentree` AS stocks_matiere_p_dateentree,
+     stocks_matiere_p.`mois` AS stocks_matiere_p_mois,
+     stocks_matiere_p.`annee` AS stocks_matiere_p_annee,
+     stocks_matiere_p.`admin` AS stocks_matiere_p_admin
+FROM
+     `stocks_matiere_p` stocks_matiere_p]]>
+	</queryString>
+	<field name="stocks_matiere_p_matieres_p" class="java.lang.String"/>
+	<field name="stocks_matiere_p_pu_v" class="java.lang.Double"/>
+	<field name="stocks_matiere_p_unite_mes" class="java.lang.String"/>
+	<field name="stocks_matiere_p_stock_dispo" class="java.lang.Double"/>
+	<field name="stocks_matiere_p_dateentree" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="553" height="95" backcolor="#000000" uuid="dda4cc24-bb0b-46bd-9e60-042aa5b4e618"/>
+				<staticText>
+					<reportElement style="Title" x="12" y="0" width="541" height="66" uuid="8155cb5d-bf53-4a07-af6a-dd908dea4acf"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[MATIERE DISPONIBLE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="211" y="66" width="195" height="29" uuid="3c551355-09b4-47e2-af3b-2e3e188af42a"/>
+					<textElement>
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[SIBY - CENTER]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="553" height="32" forecolor="#000000" backcolor="#CC0000" uuid="0ae95a5e-32d3-4ad8-998e-57b903cd6f44"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="307" y="12" width="235" height="20" forecolor="#FFFFFF" uuid="1f47a74a-c3ab-466c-9547-af8d09601c78"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="7" width="111" height="18" forecolor="#000000" uuid="e588ef10-7f59-493c-8d32-945751a9a595"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[MATIERE PRI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="111" y="7" width="111" height="18" forecolor="#000000" uuid="3ed3b180-b88f-4ded-ab0a-cb382c44181d"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[  P.U]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="222" y="7" width="111" height="18" forecolor="#000000" uuid="6a2292f0-b4ad-4c2e-b465-3d6dae46f408"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[  UNITE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="333" y="7" width="111" height="18" forecolor="#000000" uuid="722b65f8-bbd9-4008-8faf-f298643ade3c"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[ EN STOCK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="444" y="7" width="111" height="18" forecolor="#000000" uuid="0249bf0f-540d-44fe-9d7e-58d37c8c79b8"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[ENTREE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="c59eaf6d-48c7-46ed-baae-9b58db381de4"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="111" height="18" uuid="6b2fa72b-3f8f-4c59-8acd-a3e7df080ff8"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{stocks_matiere_p_matieres_p}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="124" y="0" width="98" height="18" uuid="33a3dac8-6e9c-4dd0-9e4c-216420d6823a"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{stocks_matiere_p_pu_v}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="235" y="0" width="98" height="18" uuid="86ae73ce-0918-4725-96a3-348efdea3a4e"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{stocks_matiere_p_unite_mes}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="343" y="0" width="101" height="18" uuid="90c4c4bb-132b-4738-8655-fd7e9c93ff98"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{stocks_matiere_p_stock_dispo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="455" y="0" width="100" height="18" uuid="209f4dc3-22e9-4245-96ac-4fdaf9cf4570"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{stocks_matiere_p_dateentree}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="1c24f3ba-ab68-4c9c-9e83-630986cc4be5"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="b62e8798-e9ee-46ff-bede-62065cadee58"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="f891d5bd-bd01-45f4-b008-333e1bb05a2e"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="dca219c8-24ee-4adf-9d1d-27d1589ee87a"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="cb33c1df-ae5e-4e7c-96f4-a1df7aa0afbc"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

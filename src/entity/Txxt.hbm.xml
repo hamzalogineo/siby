@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Txxt" table="txxt" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="f" type="string">
+            <column name="f" length="50" />
+        </property>
+        <property name="sf" type="string">
+            <column name="sf" length="50" />
+        </property>
+        <property name="desi" type="string">
+            <column name="desi" length="50" />
+        </property>
+        <property name="qte" type="java.lang.Integer">
+            <column name="qte" />
+        </property>
+        <property name="pa" type="java.lang.Integer">
+            <column name="pa" />
+        </property>
+        <property name="pv" type="java.lang.Integer">
+            <column name="pv" />
+        </property>
+        <property name="mu" type="java.lang.Integer">
+            <column name="mu" />
+        </property>
+        <property name="profil" type="java.lang.Integer">
+            <column name="profil" />
+        </property>
+        <property name="periode" type="string">
+            <column name="periode" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

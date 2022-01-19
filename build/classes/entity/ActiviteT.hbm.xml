@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.ActiviteT" table="activite_t" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="libelle" type="string">
+            <column name="libelle" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <property name="datedemarrage" type="string">
+            <column name="datedemarrage" length="50" />
+        </property>
+        <property name="admin" type="string">
+            <column name="admin" />
+        </property>
+        <property name="idg" type="java.lang.Integer">
+            <column name="idg" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

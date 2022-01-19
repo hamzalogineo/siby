@@ -1,0 +1,892 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package frontend;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author hp
+ */
+public class Posts extends javax.swing.JFrame {
+
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+    static final String DB_URL = "jdbc:mysql://192.168.1.117:3306/transformation";
+    static final String USER = "root";
+    static final String PASS = "interco";
+    
+    private Integer id ;
+    private String acces ;
+    
+    public Posts(){
+        
+        initComponents() ;
+        
+        this.setLocationRelativeTo(null) ;
+        
+
+        
+        
+            this.jTable1.getTableHeader().setFont(new Font("Segoe UI" , Font.BOLD , 13)) ;
+            this.jTable1.getTableHeader().setOpaque(false) ; 
+            this.jTable1.getTableHeader().setBackground(Color.black) ; 
+            this.jTable1.getTableHeader().setForeground(Color.white) ;
+            this.jTable1.setRowHeight(25) ;
+              
+        
+             DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+             
+                  headerRenderer.setBackground(Color.green) ;
+                  headerRenderer.setForeground(Color.BLACK) ;
+                  headerRenderer.setFont(new Font("Segoe UI" , Font.BOLD , 16)) ;
+
+                  for (int i = 0; i < this.jTable1.getModel().getColumnCount(); i++) {
+                    this.jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer) ;
+                    
+             }
+   
+        
+        DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ; 
+                          dtm.setRowCount(0) ;
+                          
+                          
+this.jTable1.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+    @Override
+    public Component getTableCellRendererComponent(JTable table,
+            Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+
+        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col) ;
+
+        String status = (String) table.getModel().getValueAt(row, 4) ;
+        
+      
+        //  System.out.print("Object in list 44 : "+list44.get(0));
+        
+        if ("OUI".equalsIgnoreCase(status)){
+            
+            setBackground(Color.WHITE);
+            setForeground(Color.BLACK);
+            
+        }else if("NON".equalsIgnoreCase(status)){
+            
+            setBackground(Color.BLACK);
+            setForeground(Color.WHITE);
+            
+        }   
+        
+        if(isSelected){
+            
+            this.setBackground(Color.BLUE);
+            this.setForeground(Color.WHITE);
+        }
+            
+          
+        return this ;
+        
+    }   
+}) ;
+        
+        
+
+ // connecting Mysql server using jdbc.......
+                           
+                           
+             Connection conn = null ;
+             Statement stmt = null ;
+       
+       try{
+      Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+      stmt = conn.createStatement();
+    
+      String sql = null ;
+      ResultSet rs = null ;
+       
+      
+       sql = "select * from ordinateur order by nom_post asc" ;
+      
+       rs = stmt.executeQuery(sql) ;
+      
+     while(rs.next()){
+        
+         //  "REF", "ID POST", "NOM POST", "IP POST", "AUTORISEZ"
+         
+        dtm.addRow(new Object[]{
+        rs.getInt("id"), rs.getString("id_post"), rs.getString("nom_post"), rs.getString("ip_post") , rs.getString("acces")
+        }) ;
+         
+       
+      }
+     
+        
+       
+       
+              
+              
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        id_post = new javax.swing.JTextField();
+        nom_post = new javax.swing.JTextField();
+        ip_post = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        rch = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GESTION DES POSTES SUR LES RESEAUX", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+
+        jTable1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "REF", "ID POST", "NOM POST", "POST", "AUTORISEZ"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(50);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(350);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(350);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(350);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(350);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(350);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(350);
+            jTable1.getColumnModel().getColumn(3).setMinWidth(250);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(250);
+            jTable1.getColumnModel().getColumn(3).setMaxWidth(250);
+            jTable1.getColumnModel().getColumn(4).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(4).setMaxWidth(100);
+        }
+
+        id_post.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        id_post.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        id_post.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        nom_post.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        nom_post.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nom_post.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        ip_post.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ip_post.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ip_post.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("ID DU POST");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("NOM DU POST");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("POST");
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 51));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("AJOUTER");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(0, 102, 51));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("MODIFIER");
+        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(0, 102, 51));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("VEILLEUSE");
+        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(id_post, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nom_post, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ip_post)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(187, 187, 187)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(283, 283, 283)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(159, 159, 159))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(id_post, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nom_post, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ip_post, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        rch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                rchKeyReleased(evt);
+            }
+        });
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("RECHERCHER PAR NOM POST");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(rch)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(364, 364, 364))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+         String id_post , nom_post , ip_post ;
+               id_post = this.id_post.getText().trim().replaceAll("'", "''") ;
+               nom_post = this.nom_post.getText().trim().replaceAll("'", "''") ;
+               ip_post = this.ip_post.getText().trim().replaceAll("'", "''") ;
+               
+               if(id_post.isEmpty() || nom_post.isEmpty() || ip_post.isEmpty()){  
+                   JOptionPane.showMessageDialog(null, "PARAMETRE INCORRECT");
+               }else{
+                   
+                     Connection conn = null ;
+                     Statement stmt = null ;
+       
+       try{
+           
+      Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+      stmt = conn.createStatement();
+    
+      int vy = 0 ; int vy2 = 0 ;
+      String sql = null ;
+      ResultSet rs = null ;
+      
+      sql = "select * from ordinateur where id_post = '"+id_post+"'" ;
+      
+       rs = stmt.executeQuery(sql) ;
+      
+     while(rs.next()){
+        
+         vy = 1 ;
+       
+      }
+     
+      sql = "select * from ordinateur where ip_post = '"+ip_post+"'" ;
+      
+       rs = stmt.executeQuery(sql) ;
+      
+     while(rs.next()){
+        
+         vy2 = 1 ;
+       
+      }
+     
+     if(vy == 1 || vy2 == 1){
+         
+         JOptionPane.showMessageDialog(null, "LE POSTE EXISTE DEJA");
+         
+     }else{
+         
+  
+      
+      if(stmt.executeUpdate("insert into ordinateur(id_post, nom_post, ip_post, acces) values('"+id_post+"' , '"+nom_post+"' , '"+ip_post+"' , 'NON')") == 1){
+          
+          this.id_post.setText("") ; this.nom_post.setText(""); this.ip_post.setText("");
+       
+      DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ;
+                        dtm.setRowCount(0) ;
+                        
+                        
+       
+       sql = "select * from ordinateur order by nom_post asc" ;
+      
+       rs = stmt.executeQuery(sql) ;
+      
+     while(rs.next()){
+        
+         //  "REF", "ID POST", "NOM POST", "IP POST", "AUTORISEZ"
+         
+        dtm.addRow(new Object[]{
+        rs.getInt("id"), rs.getString("id_post"), rs.getString("nom_post"), rs.getString("ip_post") , rs.getString("acces")
+        }) ;
+         
+       
+      }
+     
+        
+     
+        
+      } // end DML
+      
+      }
+       
+              
+              
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+                   
+               }
+        
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        // TODO add your handling code here:.
+        
+        
+        this.id = 0 ;
+        this.acces = "" ;
+        
+        this.id = Integer.parseInt(this.jTable1.getValueAt(this.jTable1.getSelectedRow(), 0).toString()) ;
+        this.id_post.setText(this.jTable1.getValueAt(this.jTable1.getSelectedRow(), 1).toString());
+        this.nom_post.setText(this.jTable1.getValueAt(this.jTable1.getSelectedRow(), 2).toString());
+        this.ip_post.setText(this.jTable1.getValueAt(this.jTable1.getSelectedRow(), 3).toString());
+        
+        this.acces = this.jTable1.getValueAt(this.jTable1.getSelectedRow(), 4).toString() ;
+        
+        
+    }//GEN-LAST:event_jTable1MouseReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+          if(this.jTable1.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "CHOISIR UN POST SUR LA LISTE CI-DESSOUS") ;
+        }else{
+            
+               String id_post , nom_post , ip_post ;
+               id_post = this.id_post.getText().trim().replaceAll("'", "''") ;
+               nom_post = this.nom_post.getText().trim().replaceAll("'", "''") ;
+               ip_post = this.ip_post.getText().trim().replaceAll("'", "''") ;
+               
+               if(id_post.isEmpty() || nom_post.isEmpty() || ip_post.isEmpty()){  
+                   JOptionPane.showMessageDialog(null, "PARAMETRE INCORRECT");
+               }else{
+                   
+                     Connection conn = null ;
+                     Statement stmt = null ;
+       
+       try{
+           
+      Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+      stmt = conn.createStatement();
+    
+      int vy = 0 ; int vy2 = 0 ;
+      String sql = null ;
+      ResultSet rs = null ;
+      
+
+         
+  
+      
+      if(stmt.executeUpdate("update ordinateur set id_post = '"+id_post+"' , nom_post = '"+nom_post+"' , ip_post = '"+ip_post+"' where id = "+this.id) == 1){
+          
+          this.id_post.setText("") ; this.nom_post.setText(""); this.ip_post.setText("");
+       
+      DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ;
+                        dtm.setRowCount(0) ;
+                        
+                        
+       
+       sql = "select * from ordinateur order by nom_post asc" ;
+      
+       rs = stmt.executeQuery(sql) ;
+      
+     while(rs.next()){
+        
+         //  "REF", "ID POST", "NOM POST", "IP POST", "AUTORISEZ"
+         
+        dtm.addRow(new Object[]{
+        rs.getInt("id"), rs.getString("id_post"), rs.getString("nom_post"), rs.getString("ip_post") , rs.getString("acces")
+        }) ;
+         
+       
+      }
+     
+        
+     
+        
+      } // end DML
+      
+     
+       
+              
+              
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+                   
+               }
+        
+            
+        }
+      
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        
+          if(this.jTable1.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "CHOISIR UN POST SUR LA LISTE CI-DESSOUS") ;
+        }else{
+             
+                   
+                     Connection conn = null ;
+                     Statement stmt = null ;
+       
+       try{
+           
+      Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+      stmt = conn.createStatement();
+    
+    
+      
+      String sql = null ;
+      ResultSet rs = null ;
+      
+      
+  if(this.acces.equalsIgnoreCase("NON")){
+      
+      if(stmt.executeUpdate("update ordinateur set acces = 'OUI' where id = "+this.id) == 1){
+          
+          this.id_post.setText("") ; this.nom_post.setText(""); this.ip_post.setText("");
+       
+      DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ;
+                        dtm.setRowCount(0) ;
+                        
+                        
+       
+       sql = "select * from ordinateur order by nom_post asc" ;
+      
+       rs = stmt.executeQuery(sql) ;
+      
+     while(rs.next()){
+        
+         //  "REF", "ID POST", "NOM POST", "IP POST", "AUTORISEZ"
+         
+        dtm.addRow(new Object[]{
+        rs.getInt("id"), rs.getString("id_post"), rs.getString("nom_post"), rs.getString("ip_post") , rs.getString("acces")
+        }) ;
+         
+       
+      }
+     
+        
+     
+        
+      } // end DML
+      
+      }else  if(this.acces.equalsIgnoreCase("OUI")){
+      
+      if(stmt.executeUpdate("update ordinateur set acces = 'NON' where id = "+this.id) == 1){
+          
+          this.id_post.setText("") ; this.nom_post.setText(""); this.ip_post.setText("");
+       
+      DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ;
+                        dtm.setRowCount(0) ;
+                        
+                        
+       
+       sql = "select * from ordinateur order by nom_post asc" ;
+      
+       rs = stmt.executeQuery(sql) ;
+      
+     while(rs.next()){
+        
+         //  "REF", "ID POST", "NOM POST", "IP POST", "AUTORISEZ"
+         
+        dtm.addRow(new Object[]{
+        rs.getInt("id"), rs.getString("id_post"), rs.getString("nom_post"), rs.getString("ip_post") , rs.getString("acces")
+        }) ;
+         
+       
+      }
+     
+        
+     
+        
+      } // end DML
+      
+      }
+       
+              
+              
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+                   
+       
+        
+            
+        }
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void rchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rchKeyReleased
+        // TODO add your handling code here:
+        
+                   Connection conn = null ;
+                   Statement stmt = null ;
+       
+       try{
+           
+      Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+      stmt = conn.createStatement();
+    
+       
+      String sql = null ;
+      ResultSet rs = null ;
+      
+      DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ;
+                        dtm.setRowCount(0) ;
+                        
+                        
+       sql = "select * from ordinateur where nom_post like '%"+this.nom_post.getText().trim().replaceAll("'", "''")+"%' order by nom_post asc" ;
+      
+      rs = stmt.executeQuery(sql) ;
+      
+     while(rs.next()){
+        
+         //  "REF", "ID POST", "NOM POST", "IP POST", "AUTORISEZ"
+         
+        dtm.addRow(new Object[]{
+        rs.getInt("id"), rs.getString("id_post"), rs.getString("nom_post"), rs.getString("ip_post") , rs.getString("acces")
+        }) ;
+         
+       
+      }
+     
+              
+              
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+        
+        
+    }//GEN-LAST:event_rchKeyReleased
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Posts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Posts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Posts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Posts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Posts().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField id_post;
+    private javax.swing.JTextField ip_post;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField nom_post;
+    private javax.swing.JTextField rch;
+    // End of variables declaration//GEN-END:variables
+}

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bonCommande" pageWidth="274" pageHeight="841" whenNoDataType="AllSectionsNoDetail" columnWidth="268" leftMargin="4" rightMargin="2" topMargin="2" bottomMargin="10" uuid="48253179-15cc-4db5-aee0-d0e295fbbf7a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="bonData" uuid="2ecb6b87-d3bc-478d-b37d-96b9fa3c1be3">
+		<parameter name="sql" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+		<field name="qte" class="java.lang.Integer"/>
+		<field name="desi" class="java.lang.String"/>
+		<field name="pu" class="java.lang.Integer"/>
+		<field name="montant" class="java.lang.Integer"/>
+		<field name="total" class="java.lang.Long"/>
+	</subDataset>
+	<parameter name="sql" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="nBon" class="java.lang.Integer"/>
+	<parameter name="nom" class="java.lang.String"/>
+	<parameter name="n" class="java.lang.Integer"/>
+	<parameter name="login" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="95" splitType="Stretch">
+			<staticText>
+				<reportElement x="29" y="5" width="167" height="15" uuid="66bf045d-654a-418e-afbe-f8c4f84c5435"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALIMENTATION - RESTAURANT - SIBY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="20" width="167" height="15" uuid="fc061674-6c99-42a5-bbb6-4da68e644bec"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BON DE COMMANDE USAGE INTERNE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="78" width="29" height="15" uuid="cad44b7b-b894-422f-8cd8-b0242b5fbfae"/>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="39" y="78" width="82" height="15" uuid="5b53101b-7d36-4462-8047-d35203ef38bf"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="125" y="78" width="39" height="15" uuid="1ae9de77-2b4b-4fdb-9c5f-d0cc558721ca"/>
+				<text><![CDATA[Bon nº:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="164" y="78" width="46" height="15" uuid="1c02c285-ae2d-452f-9611-c594f49ecd06"/>
+				<textFieldExpression><![CDATA[$P{nBon}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="74" y="32" width="82" height="15" uuid="6dd3a6bd-5016-4204-8d60-94f3e055ffbd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Production info :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="48" width="136" height="15" uuid="de3575a7-2bc3-4a5d-b397-3904650fae0d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="44" y="63" width="24" height="15" uuid="06b99645-87a2-4ce2-ae33-e17d5e7a0262"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="63" width="37" height="15" uuid="5149b154-5cd6-4856-99f3-f8a5ffbc8ac1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{n}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="44" y="48" width="30" height="15" uuid="eb7423e7-e6e4-46bf-a61b-bf1bcf27d886"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="121" y="63" width="89" height="15" uuid="35d5976e-4272-49db-b3f3-809bb0798477"/>
+				<textFieldExpression><![CDATA["OP"+" "+$P{login}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="49" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="201" height="46" uuid="c51aba3a-0d44-4fb7-93e0-d5b176c903b6"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="bonData" uuid="5598c3ec-6422-42d5-b8a5-348dff78e2fd">
+						<dataSourceExpression><![CDATA[$P{sql}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="28" uuid="7655881c-7e0f-46ac-9725-68d127980415">
+						<jr:tableHeader style="table_TH" height="12" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="28" height="12" uuid="08084404-a6a7-45a0-833a-8f83465cb7c2"/>
+								<textElement>
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[QTE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="19" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="28" height="19" uuid="9e987f1b-4f7b-4c99-ac08-3eadb0790d9c"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{qte}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="112" uuid="4448eaa1-66a0-4586-a24d-020195056844">
+						<jr:tableHeader style="table_TH" height="12" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="112" height="12" uuid="a2b47f7f-e769-4e24-995e-67580ee2ed9b"/>
+								<textElement>
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[DESIGNATION]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="19" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="112" height="19" uuid="bc466609-1024-440f-a998-6eb8130b7377"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{desi}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="28" uuid="a1b271b4-69f5-4291-8e9d-5162bfcef31c">
+						<jr:tableHeader style="table_TH" height="12" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="27" height="12" uuid="fa70ad17-1eff-44e7-85a4-dfcc4c583505"/>
+								<textElement>
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[P.U]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter height="12" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="28" height="12" uuid="4d494428-7ecc-485c-8a39-8f92cc6edef4"/>
+								<textElement>
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TOTAL]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:detailCell style="table_TD" height="19" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="28" height="19" uuid="bd67b1c9-ee07-4f91-8b71-707a8271e88f"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{pu}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="30" uuid="a86070f6-c698-4240-bfb8-8f8f73adc7cf">
+						<jr:tableHeader style="table_TH" height="12" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="12" uuid="b07dd85a-10b0-44ad-adfb-bde152597f6d"/>
+								<textElement>
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[MTT]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter height="12" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="30" height="12" uuid="28f776ae-0c0f-479e-a857-710fab2868c4"/>
+								<textElement>
+									<font size="8" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:detailCell style="table_TD" height="19" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="30" height="19" uuid="dd099c0b-8fbc-4344-8683-d968f8444563"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{montant}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

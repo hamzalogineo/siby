@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AlerteExpi" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fc4c34ca-c66d-4cdd-8478-f81122fdcc79">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="AlerteStock" uuid="fd3bfceb-f00e-4d5d-a270-f2bb5b866eb3">
+		<parameter name="sql" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+		<field name="cb" class="java.lang.String"/>
+		<field name="desi" class="java.lang.String"/>
+		<field name="stock" class="java.lang.Integer"/>
+		<field name="date_expi" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="sql" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement x="16" y="2" width="71" height="13" uuid="fa53a309-bc5f-4fd8-b976-b85d27f7b6c8"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIBY CENTER ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="42" width="89" height="13" uuid="67b52d72-6042-470d-97a7-b02eba8e577f"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[BD MOHAMED VI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="15" width="89" height="13" uuid="e4eefe3b-65d9-4934-8e14-6f48826c1055"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[SUPER MARCHE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="28" width="89" height="14" uuid="f32b9942-4d09-4825-8a45-2d18ae9a76d6"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[DJICORONI PARA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="55" width="89" height="15" uuid="669c083a-2dce-4bbe-8476-3c8b91f11099"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tél.: 20 22 18 82]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="22" width="174" height="20" uuid="10c0f1a7-548f-4322-8cac-92ab3010e6fb"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alerte date d'expiration]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="423" y="55" width="80" height="13" uuid="53e0e649-2866-473d-a506-3654ab0b8df2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="503" y="55" width="52" height="13" uuid="f5148182-cf8c-4a01-b96d-8d022f352f61"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="393" y="2" width="162" height="14" uuid="664b95a7-7c7f-4985-9344-fab6f9d9c685"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="16" y="0" width="528" height="50" uuid="f6c7f8ab-0e0e-4513-ad8e-7c9a0ad35b82"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="AlerteStock" uuid="f4073af0-1896-474f-b1b8-01db1608534e">
+						<dataSourceExpression><![CDATA[$P{sql}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="127" uuid="232a7f79-d9a8-448a-955e-63fd8ba4afc9">
+						<jr:tableHeader style="table 1_TH" height="24" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="127" height="24" uuid="868d4d7c-65a2-4d90-b135-9d58873532d5"/>
+								<textElement>
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Code barre]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table 1_TD" height="23" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="127" height="23" uuid="8af809f1-a8b3-4fac-935e-505bbd0d7d55"/>
+								<textFieldExpression><![CDATA[$F{cb}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="179" uuid="60e6dcb2-6a10-4d03-b289-e58c385a25df">
+						<jr:tableHeader style="table 1_TH" height="24" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="179" height="24" uuid="e6f4fa65-e578-4bf6-85ae-b8ad46f1d575"/>
+								<textElement>
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Désignation]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table 1_TD" height="23" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="179" height="23" uuid="b41d3ed5-bb2f-486d-932f-f68e490fd9c1"/>
+								<textFieldExpression><![CDATA[$F{desi}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="103" uuid="01d96b25-2cfb-4697-a5a4-91fcb387b93d">
+						<jr:tableHeader style="table 1_TH" height="24" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="103" height="24" uuid="c57754e8-0e77-4b5a-b694-226dac49de7c"/>
+								<textElement>
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Stock]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table 1_TD" height="23" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="103" height="23" uuid="c1b84b6e-d1f1-4db6-877e-80ea8bd2f995"/>
+								<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="114" uuid="d8d38bbe-e938-4991-a3bf-23eac5a8d687">
+						<jr:tableHeader style="table 1_TH" height="24" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="114" height="24" uuid="0613a2fa-ddd2-434d-bba2-f153e89998b3"/>
+								<textElement>
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Date d'expiration]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table 1_TD" height="23" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="114" height="23" uuid="431d86e8-9870-41ec-8e00-8d300ca98c91"/>
+								<textFieldExpression><![CDATA[$F{date_expi}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

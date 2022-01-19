@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bon_d_r" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9926ff58-b1d6-4171-827e-0e6bb1386302">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mysql"/>
+	<parameter name="ref" class="java.lang.String"/>
+	<parameter name="dtec" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[""]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="depot_retrait"/>
+	</field>
+	<field name="cb" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cb"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="depot_retrait"/>
+	</field>
+	<field name="mtt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mtt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="depot_retrait"/>
+	</field>
+	<field name="motif" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="motif"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="depot_retrait"/>
+	</field>
+	<field name="dtec" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dtec"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="depot_retrait"/>
+	</field>
+	<field name="admin" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="admin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="depot_retrait"/>
+	</field>
+	<field name="type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="type"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="depot_retrait"/>
+	</field>
+	<field name="rub" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="rub"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rubrique"/>
+	</field>
+	<field name="COLUMN_15" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="srb"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sousrub"/>
+	</field>
+	<field name="perso" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="perso"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="perso_t"/>
+	</field>
+	<field name="ref" class="java.lang.String"/>
+	<field name="tiers" class="java.lang.String"/>
+	<field name="copie" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="793">
+			<textField>
+				<reportElement x="228" y="100" width="170" height="18" uuid="15ba6dc6-e0e5-4c0e-aecc-f309f3459948">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["N° : "+$F{id}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="437" y="98" width="104" height="35" uuid="cd5ff6f6-9ac3-4e78-97c1-ff06cfb59ecc"/>
+				<jr:Code128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$F{cb}]]></jr:codeExpression>
+				</jr:Code128>
+			</componentElement>
+			<textField>
+				<reportElement x="218" y="135" width="320" height="18" uuid="484b6048-f3b8-488a-8e4d-ac8a3e7c4812">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Bamako, le "+$F{dtec}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="155" width="512" height="18" uuid="625adb5e-4f48-422e-9e91-7203ac4286cc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["AVIS DE  "+$F{type}+"  D'ESPECE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="175" width="170" height="18" uuid="c94dcdad-9612-4855-8938-2c38c9e0fd17">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["OP : "+$F{admin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="195" width="359" height="18" uuid="642b5549-d97f-46f5-ba3b-b93e0dce540e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RUBRIQUE : "+$F{rub}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="215" width="359" height="18" uuid="0f971dbd-4fd0-4f94-8154-73817665381e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SOUS RUBRIQUE : "+$F{COLUMN_15}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="235" width="359" height="18" uuid="2dbebd2c-daaf-44a1-a1e4-876c04de19b6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TIERS : "+$F{tiers}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="255" width="359" height="18" uuid="be98ae31-8066-47bc-b52d-f0331b594939">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["REF. : "+$F{ref}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="103" y="278" width="435" height="18" uuid="2d9c6e60-3076-45a5-986f-9dff33944939">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mtt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="23" y="278" width="80" height="18" uuid="ddfe5b54-661a-45fb-938d-9d2844da4d29"/>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[MONTANT : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="23" y="299" width="515" height="487" uuid="00c7f591-2c10-4c0f-9daf-c33923c5839c"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="14" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["LE MOTIF : "+$F{motif}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="24" y="6" width="514" height="18" uuid="e872bba6-a44f-449a-bf05-501e817de908">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIBY CENTER ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="25" width="515" height="18" uuid="492a4c2d-4efe-4b29-aa5b-f09f2d7bd8da"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[DJICORONI PARA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="44" width="515" height="18" uuid="7fad17e9-b8ea-46e1-92f3-e17482ecbd21"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[BD MOHAMED VI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="63" width="515" height="18" uuid="673a9a57-ecc1-4244-8154-c29fb5b49294"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Tél : 76 62 06 75 / 65 76 79 62]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="85" width="515" height="11" uuid="205a5ac0-6f63-4fd6-bd16-06492b8a6af6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[--------------------------------------------------------------------------------------- X ---------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="58" y="115" width="100" height="18" uuid="4e695569-05a7-4537-a0b5-d542f7498043"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{copie}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,737 @@
+ this.btn_con.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR)) ;
+       
+        String choix = this.choix.getSelectedItem().toString().replaceAll("'", "''") ;
+        if("CHOISIR UNE APPLICATION".equalsIgnoreCase(choix)){
+            
+             this.btn_con.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            
+            JOptionPane jpanel=new JOptionPane();
+   jpanel.showMessageDialog(null,"Les champs Nom utilisateur ou mot de passe et choix d'application sont obligatoire","Avertissement",JOptionPane.WARNING_MESSAGE);
+  
+        }else if("PRODUCTION ET TRANSFORMATION".equalsIgnoreCase(choix)){
+        
+        
+       char[] pass = mp.getPassword();
+       
+        // le couple login et mot de passe
+        
+          String login1 , mp1 ;
+          
+        //recup text du champ login
+          
+        login1 = login.getText().trim();
+        
+        //la convertion du mpc de char en string : new String(char[] password) or String.valueof(char[] password) ok ;
+      // mp=String.valueOf(pass);
+        
+        mp1 = new String(pass) ;
+        
+       //verification du contenu des champs log et mp si il ne sont pas vide
+        
+        if("".equalsIgnoreCase(login1) || "".equalsIgnoreCase(String.valueOf(mp1.trim()))){
+            
+            
+   JOptionPane jpanel=new JOptionPane();
+   jpanel.showMessageDialog(null,"Les champs Nom utilisateur ou mot de passe sont obligatoire","Avertissement",JOptionPane.WARNING_MESSAGE);
+        
+                  
+        }
+        
+        //Dans le cas ou le couple login et Mot de passe sont different null ou "" ou vide on attaque le server de donnee sante
+        
+        else{
+            
+            int i = 0 ;
+            
+        /*
+            try{
+            SessionFactory sf=new Configuration().configure().buildSessionFactory();
+            Session s=sf.openSession();
+            
+            // query of selection
+            
+            
+                  ADMIN1
+                  ADMIN2
+                  CAISSE
+                  MATERIELS CEREMONIE
+            
+            
+            
+            List lad1 = s.createSQLQuery("SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'SUPER ADMINISTRATEUR' ").list() ;
+            List lad2 = s.createSQLQuery("SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ADMINISTRATEUR' ").list() ;
+            List lcaisse = s.createSQLQuery("SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ORDINAIRE' ").list() ;
+            
+                   // verification if qery is ok
+            
+            if(lad1.size() == 1 || lad2.size() == 1 || lcaisse.size() == 1){
+                
+                //
+          
+                */
+                        
+                 Connection conn = null ;
+                 Statement stmt = null ;
+       
+       try{
+      Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+      stmt = conn.createStatement();
+      String sql , sql1 , sql2 ;
+      
+      // Admin1
+      
+       sql= "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'SUPER ADMINISTRATEUR'" ;
+      
+       ResultSet rs = stmt.executeQuery(sql);
+      
+     while(rs.next()){
+         
+           this.btn_con.setEnabled(false) ;
+         
+           Admin1 e = new Admin1() ;  // rs.getString("nom_c")) ;
+                 
+                  e.setUser_c(rs.getString("login"));
+                  e.setRole(rs.getString("role"));
+                  e.setPhone(rs.getString("phone"));
+                  e.setLog(e.getUser_c()) ;
+        
+                  e.setVisible(true);
+       
+          this.setVisible(false);
+          i = 1 ;
+       
+     }
+     
+      // Admin2
+      
+    sql1= "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ADMINISTRATEUR'" ;
+      
+       ResultSet rs1 = stmt.executeQuery(sql1) ;
+      
+       while(rs1.next()){
+           
+             this.btn_con.setEnabled(false) ;
+         
+           comptePere e = new comptePere() ;
+                
+                  e.setUser_c(rs1.getString("login"));
+                  e.setRole(rs1.getString("role"));
+                  e.setPhone(rs1.getString("phone"));
+                  e.setLog(e.getUser_c()) ;
+        
+                  e.setVisible(true);
+       
+          this.setVisible(false);
+          i = 1 ;
+        
+     }
+       
+       
+     // ADMINII DE SIKASSO COMPTE :
+      
+    sql1= "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ADMINII'" ;
+      
+       ResultSet rs3 = stmt.executeQuery(sql1) ;
+      
+       while(rs3.next()){
+           
+             this.btn_con.setEnabled(false) ;
+         
+           AdminII e = new AdminII() ;
+                
+                  e.setUser_c(rs3.getString("login"));
+                  e.setRole(rs3.getString("role"));
+                  e.setPhone(rs3.getString("phone"));
+                  e.setLog(e.getUser_c()) ;
+        
+                  e.setVisible(true);
+       
+          this.setVisible(false);
+          i = 1 ;
+        
+     }
+       
+       
+       
+       
+       
+       
+        // Caisse
+       
+        sql2 = "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ORDINAIRE'" ;
+      
+       ResultSet rs2 = stmt.executeQuery(sql2) ;
+      
+       while(rs2.next()){
+           
+             this.btn_con.setEnabled(false) ;
+         
+           compteOrdinaire e = new compteOrdinaire() ;
+                  e.setUser_c(rs2.getString("login")) ;
+                  e.setRole(rs2.getString("role")) ;
+                  e.setPhone(rs2.getString("phone")) ;
+                  e.setLog(e.getUser_c()) ;
+        
+                  e.setVisible(true) ;
+       
+          this.setVisible(false) ;
+          i = 1 ;
+        
+     }
+       
+       if(i == 1){
+           
+       }else{
+            JOptionPane jpanel=new JOptionPane();
+jpanel.showMessageDialog(null,"Nom d'Utilisateur ou Mot de passe erroné","ERREUR",JOptionPane.ERROR_MESSAGE);
+            }
+       
+       
+       
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+   }
+            // si non message d'erreur
+           
+            /*
+            }catch(Exception e){
+            JOptionPane jpanel=new JOptionPane();
+jpanel.showMessageDialog(null,"ERREUR reseau server inaccessible","ERREUR",JOptionPane.ERROR_MESSAGE);
+            }
+            */
+            
+        }else if("GATEAU SIBY".equalsIgnoreCase(choix)){
+            
+           // JOptionPane.showMessageDialog(null, "LE LOGICIEL GATEAU SIBY EST EN COURS DE DEVELOPPEMENT !") ;
+            
+            // debut :
+            
+             
+       char[] pass = mp.getPassword();
+       
+        // le couple login et mot de passe
+        
+          String login1 , mp1 ;
+          
+        //recup text du champ login
+          
+        login1 = login.getText().trim();
+        
+        //la convertion du mpc de char en string : new String(char[] password) or String.valueof(char[] password) ok ;
+      // mp=String.valueOf(pass);
+        
+        mp1 = new String(pass) ;
+        
+       //verification du contenu des champs log et mp si il ne sont pas vide
+        
+        if("".equalsIgnoreCase(login1) || "".equalsIgnoreCase(String.valueOf(mp1.trim()))){
+            
+            
+   JOptionPane jpanel=new JOptionPane();
+   jpanel.showMessageDialog(null,"Les champs Nom utilisateur ou mot de passe sont obligatoire","Avertissement",JOptionPane.WARNING_MESSAGE);
+        
+                  
+        }
+        
+        //Dans le cas ou le couple login et Mot de passe sont different null ou "" ou vide on attaque le server de donnee sante
+        
+        else{
+            
+            int i = 0 ;
+            
+        /*
+            try{
+            SessionFactory sf=new Configuration().configure().buildSessionFactory();
+            Session s=sf.openSession();
+            
+            // query of selection
+            
+            
+                  ADMIN1
+                  ADMIN2
+                  CAISSE
+                  MATERIELS CEREMONIE
+            
+            
+            
+            List lad1 = s.createSQLQuery("SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'SUPER ADMINISTRATEUR' ").list() ;
+            List lad2 = s.createSQLQuery("SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ADMINISTRATEUR' ").list() ;
+            List lcaisse = s.createSQLQuery("SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ORDINAIRE' ").list() ;
+            
+                   // verification if qery is ok
+            
+            if(lad1.size() == 1 || lad2.size() == 1 || lcaisse.size() == 1){
+                
+                //
+          
+                */
+                        
+                 Connection conn = null ;
+                 Statement stmt = null ;
+       
+       try{
+      Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+      stmt = conn.createStatement();
+      String sql , sql1 , sql2 ;
+      
+      // Admin1
+      
+       sql= "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'SUPER ADMINISTRATEUR'" ;
+      
+       ResultSet rs = stmt.executeQuery(sql);
+      
+     while(rs.next()){
+         
+           this.btn_con.setEnabled(false) ;
+         
+           GestionGateauFo e = new GestionGateauFo(rs.getString("login"), rs.getString("role")) ;  // rs.getString("nom_c")) ;
+                 
+           /*                  
+                 e.setUser_c(rs.getString("login"));
+                  e.setRole(rs.getString("role"));
+                  e.setPhone(rs.getString("phone"));
+                  e.setLog(e.getUser_c()) ;
+           
+             */
+                
+           
+                  e.setVisible(true);
+       
+          this.setVisible(false);
+          i = 1 ;
+       
+     }
+     
+      // Admin2
+      
+    sql1= "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ADMINISTRATEUR'" ;
+      
+       ResultSet rs1 = stmt.executeQuery(sql1) ;
+      
+       while(rs1.next()){
+           
+             this.btn_con.setEnabled(false) ;
+         
+         GestionGateauFo e = new GestionGateauFo(rs1.getString("login"), rs1.getString("role")) ; 
+                
+           /*
+                  e.setUser_c(rs1.getString("login"));
+                  e.setRole(rs1.getString("role"));
+                  e.setPhone(rs1.getString("phone"));
+                  e.setLog(e.getUser_c()) ;
+        */
+           
+                  e.setVisible(true);
+       
+          this.setVisible(false);
+          i = 1 ;
+        
+     }
+       
+       
+     // ADMINII DE SIKASSO COMPTE :
+      
+    sql1= "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ADMINII'" ;
+      
+       ResultSet rs3 = stmt.executeQuery(sql1) ;
+      
+       while(rs3.next()){
+           
+             this.btn_con.setEnabled(false) ;
+         
+          GestionGateauFo e = new GestionGateauFo(rs3.getString("login"), rs3.getString("role")) ; 
+                
+           /*
+                  e.setUser_c(rs3.getString("login"));
+                  e.setRole(rs3.getString("role"));
+                  e.setPhone(rs3.getString("phone"));
+                  e.setLog(e.getUser_c()) ;
+        */
+           
+                  e.setVisible(true);
+       
+          this.setVisible(false);
+          i = 1 ;
+        
+     }
+       
+       
+       
+       
+       
+       
+        // Caisse
+       
+        sql2 = "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ORDINAIRE'" ;
+      
+       ResultSet rs2 = stmt.executeQuery(sql2) ;
+      
+       while(rs2.next()){
+           
+             this.btn_con.setEnabled(false) ;
+         
+         GestionGateauFo e = new GestionGateauFo(rs2.getString("login"), rs2.getString("role")) ; 
+           
+           /*
+                  e.setUser_c(rs2.getString("login")) ;
+                  e.setRole(rs2.getString("role")) ;
+                  e.setPhone(rs2.getString("phone")) ;
+                  e.setLog(e.getUser_c()) ;
+           */
+        
+                  e.setVisible(true) ;
+       
+          this.setVisible(false) ;
+          i = 1 ;
+        
+     }
+       
+       if(i == 1){
+           
+       }else{
+            JOptionPane jpanel=new JOptionPane();
+jpanel.showMessageDialog(null,"Nom d'Utilisateur ou Mot de passe erroné","ERREUR",JOptionPane.ERROR_MESSAGE);
+            }
+       
+       
+       
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+   }
+            // si non message d'erreur
+           
+            /*
+            }catch(Exception e){
+            JOptionPane jpanel=new JOptionPane();
+jpanel.showMessageDialog(null,"ERREUR reseau server inaccessible","ERREUR",JOptionPane.ERROR_MESSAGE);
+            }
+            */
+            
+            // end :
+            
+            
+            
+            
+        }else if("SERVICE LOCATION".equalsIgnoreCase(choix)){
+            
+           // JOptionPane.showMessageDialog(null, "LE LOGICIEL GATEAU SIBY EST EN COURS DE DEVELOPPEMENT !") ;
+            
+            // debut :
+            
+             
+       char[] pass = mp.getPassword();
+       
+        // le couple login et mot de passe
+        
+          String login1 , mp1 ;
+          
+        //recup text du champ login
+          
+        login1 = login.getText().trim();
+        
+        //la convertion du mpc de char en string : new String(char[] password) or String.valueof(char[] password) ok ;
+      // mp=String.valueOf(pass);
+        
+        mp1 = new String(pass) ;
+        
+       //verification du contenu des champs log et mp si il ne sont pas vide
+        
+        if("".equalsIgnoreCase(login1) || "".equalsIgnoreCase(String.valueOf(mp1.trim()))){
+            
+            
+   JOptionPane jpanel=new JOptionPane();
+   jpanel.showMessageDialog(null,"Les champs Nom utilisateur ou mot de passe sont obligatoire","Avertissement",JOptionPane.WARNING_MESSAGE);
+        
+                  
+        }
+        
+        //Dans le cas ou le couple login et Mot de passe sont different null ou "" ou vide on attaque le server de donnee sante
+        
+        else{
+            
+            int i = 0 ;
+            
+        /*
+            try{
+            SessionFactory sf=new Configuration().configure().buildSessionFactory();
+            Session s=sf.openSession();
+            
+            // query of selection
+            
+            
+                  ADMIN1
+                  ADMIN2
+                  CAISSE
+                  MATERIELS CEREMONIE
+            
+            
+            
+            List lad1 = s.createSQLQuery("SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'SUPER ADMINISTRATEUR' ").list() ;
+            List lad2 = s.createSQLQuery("SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ADMINISTRATEUR' ").list() ;
+            List lcaisse = s.createSQLQuery("SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ORDINAIRE' ").list() ;
+            
+                   // verification if qery is ok
+            
+            if(lad1.size() == 1 || lad2.size() == 1 || lcaisse.size() == 1){
+                
+                //
+          
+                */
+                        
+                 Connection conn = null ;
+                 Statement stmt = null ;
+       
+       try{
+      Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+      stmt = conn.createStatement();
+      String sql , sql1 , sql2 ;
+      
+      // Admin1
+      
+       sql= "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'SUPER ADMINISTRATEUR'" ;
+      
+       ResultSet rs = stmt.executeQuery(sql);
+      
+     while(rs.next()){
+         
+           this.btn_con.setEnabled(false) ;
+           
+           
+           MenuLocationFO1 mfo = new MenuLocationFO1(rs.getString("login"), rs.getString("role")) ;
+                          // mfo.setLogin(rs.getString("login")) ;
+                          
+                          mfo.setVisible(true);
+                          this.setVisible(false) ;
+                          
+         
+     //      GestionGateauFo e = new GestionGateauFo(rs.getString("login"), rs.getString("role")) ;  // rs.getString("nom_c")) ;
+                 
+           /*                  
+                 e.setUser_c(rs.getString("login"));
+                  e.setRole(rs.getString("role"));
+                  e.setPhone(rs.getString("phone"));
+                  e.setLog(e.getUser_c()) ;
+           
+             */
+                
+           
+                 // e.setVisible(true);
+       
+         // this.setVisible(false);
+                          
+                          
+          i = 1 ;
+       
+     }
+     
+      // Admin2
+      
+    sql1= "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ADMINISTRATEUR'" ;
+      
+        rs = stmt.executeQuery(sql1) ;
+      
+       while(rs.next()){
+           
+             this.btn_con.setEnabled(false) ;
+             
+             MenuLocationFO1 mfo = new MenuLocationFO1(rs.getString("login"), rs.getString("role")) ;
+                        //   mfo.setLogin(rs.getString("login")) ;
+                          
+                          mfo.setVisible(true);
+                          this.setVisible(false) ;
+         
+     //    GestionGateauFo e = new GestionGateauFo(rs1.getString("login"), rs1.getString("role")) ; 
+                
+           /*
+                  e.setUser_c(rs1.getString("login"));
+                  e.setRole(rs1.getString("role"));
+                  e.setPhone(rs1.getString("phone"));
+                  e.setLog(e.getUser_c()) ;
+        */
+           
+            //      e.setVisible(true);
+       
+         //  this.setVisible(false);
+                          
+          i = 1 ;
+        
+     }
+       
+       
+     // ADMINII DE SIKASSO COMPTE :
+      
+    sql1= "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ADMINII'" ;
+      
+        rs = stmt.executeQuery(sql1) ;
+      
+       while(rs.next()){
+           
+             this.btn_con.setEnabled(false) ;
+         
+             MenuLocationFO1 mfo = new MenuLocationFO1(rs.getString("login"), rs.getString("role")) ;
+                         // mfo.setLogin(rs.getString("login")) ;
+                          
+                          mfo.setVisible(true);
+                          this.setVisible(false) ;
+                          
+                          
+        //  GestionGateauFo e = new GestionGateauFo(rs3.getString("login"), rs3.getString("role")) ; 
+                
+           /*
+                  e.setUser_c(rs3.getString("login"));
+                  e.setRole(rs3.getString("role"));
+                  e.setPhone(rs3.getString("phone"));
+                  e.setLog(e.getUser_c()) ;
+        */
+           
+               //   e.setVisible(true);
+       
+         // this.setVisible(false);
+                          
+                          
+          i = 1 ;
+        
+     }
+       
+       
+       
+       
+       
+       
+        // Caisse
+       
+        sql2 = "SELECT * FROM comptes_u WHERE login='"+login1.replaceAll("'", "''")+"' AND mp='"+ mp1.replaceAll("'", "''").trim()+"' AND status = 'activer' AND role = 'ORDINAIRE'" ;
+      
+        rs = stmt.executeQuery(sql2) ;
+      
+       while(rs.next()){
+           
+             this.btn_con.setEnabled(false) ;
+             
+              MenuLocationFO1 mfo = new MenuLocationFO1(rs.getString("login"), rs.getString("role")) ;
+                      //    mfo.setLogin(rs.getString("login")) ;
+                          
+                          mfo.setVisible(true);
+                          this.setVisible(false) ;
+         
+       //  GestionGateauFo e = new GestionGateauFo(rs2.getString("login"), rs2.getString("role")) ; 
+           
+           /*
+                  e.setUser_c(rs2.getString("login")) ;
+                  e.setRole(rs2.getString("role")) ;
+                  e.setPhone(rs2.getString("phone")) ;
+                  e.setLog(e.getUser_c()) ;
+           */
+        
+                 // e.setVisible(true) ;
+       
+         // this.setVisible(false) ;
+                          
+                          
+          i = 1 ;
+        
+     }
+       
+       if(i == 1){
+           
+       }else{
+            JOptionPane jpanel=new JOptionPane();
+jpanel.showMessageDialog(null,"Nom d'Utilisateur ou Mot de passe erroné","ERREUR",JOptionPane.ERROR_MESSAGE);
+            }
+       
+       
+       
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+   }
+            // si non message d'erreur
+           
+            /*
+            }catch(Exception e){
+            JOptionPane jpanel=new JOptionPane();
+jpanel.showMessageDialog(null,"ERREUR reseau server inaccessible","ERREUR",JOptionPane.ERROR_MESSAGE);
+            }
+            */
+            
+            // end :
+            
+            
+            
+            
+        }  // end choix , can start new choix condition here : 
+       
+        // GestionService Location Fo
+        
+         this.btn_con.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)) ;

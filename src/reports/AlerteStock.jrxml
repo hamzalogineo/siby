@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AlerteStock" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fc4c34ca-c66d-4cdd-8478-f81122fdcc79">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="AlerteStock" uuid="fd3bfceb-f00e-4d5d-a270-f2bb5b866eb3">
+		<parameter name="sql" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+		<field name="cb" class="java.lang.String"/>
+		<field name="desi" class="java.lang.String"/>
+		<field name="stock" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="sql" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement x="16" y="2" width="71" height="13" uuid="fa53a309-bc5f-4fd8-b976-b85d27f7b6c8"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIBY CENTER ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="42" width="89" height="13" uuid="67b52d72-6042-470d-97a7-b02eba8e577f"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[BD MOHAMED VI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="15" width="89" height="13" uuid="e4eefe3b-65d9-4934-8e14-6f48826c1055"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[SUPER MARCHE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="28" width="89" height="14" uuid="f32b9942-4d09-4825-8a45-2d18ae9a76d6"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[DJICORONI PARA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="55" width="89" height="15" uuid="669c083a-2dce-4bbe-8476-3c8b91f11099"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tél.: 20 22 18 82]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="22" width="96" height="20" uuid="10c0f1a7-548f-4322-8cac-92ab3010e6fb"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alerte Stock]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="423" y="55" width="80" height="13" uuid="53e0e649-2866-473d-a506-3654ab0b8df2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="503" y="55" width="52" height="13" uuid="f5148182-cf8c-4a01-b96d-8d022f352f61"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="393" y="2" width="162" height="14" uuid="664b95a7-7c7f-4985-9344-fab6f9d9c685"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="59" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="16" y="0" width="528" height="59" uuid="40623fa2-18eb-48dc-bbc7-ee327fbc13d5"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="AlerteStock" uuid="ff48c2b6-9ef3-4450-8517-01011260508b">
+						<dataSourceExpression><![CDATA[$P{sql}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="148" uuid="9f43eca8-24c2-4c77-a076-812169aafa64">
+						<jr:tableHeader style="table_TH" height="23" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="148" height="23" uuid="786f5cd7-2fc2-4fc6-a46b-68ca56b6bbb4"/>
+								<textElement>
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Code barre]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="148" height="26" uuid="21550d07-9dd6-467a-b233-635845e1a8f3"/>
+								<textFieldExpression><![CDATA[$F{cb}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="238" uuid="b3ee59ff-b130-417b-a77f-d8cfa54a8c35">
+						<jr:tableHeader style="table_TH" height="23" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="238" height="23" uuid="496ed7a5-5ba1-46dc-9c50-a17719f05954"/>
+								<textElement>
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Désignation]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="238" height="26" uuid="8c427628-7e54-4258-95b2-92c7c8fd9c18"/>
+								<textFieldExpression><![CDATA[$F{desi}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="137" uuid="09a00d26-b295-48eb-abbd-8033e64c0560">
+						<jr:tableHeader style="table_TH" height="23" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="137" height="23" uuid="78f59411-63dd-4e04-be5f-a345955dacc9"/>
+								<textElement>
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Stock]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="table_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="137" height="26" uuid="03856279-f41c-447b-987c-a8765bb944ed"/>
+								<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

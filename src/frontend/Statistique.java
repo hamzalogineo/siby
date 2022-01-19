@@ -1,0 +1,1200 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package frontend;
+
+import static frontend.Clients1.DB_URL;
+import static frontend.Lacaisse.JDBC_DRIVER;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+/**
+ *
+ * @author HAMZA
+ */
+public class Statistique extends javax.swing.JFrame {
+
+    /**
+     * Creates new form Statistique
+     */
+    
+      static final String JDBC_DRIVER = "com.mysql.jdbc.Driver" ;  
+      static final String DB_URL = "jdbc:mysql://192.168.1.117:3306/transformation" ;
+      static final String USER = "root" ;
+      static final String PASS = "interco" ;
+      
+      
+      String user_c ;
+      String role ;
+      String phone ;
+      
+      
+       DefaultListModel mtp = new DefaultListModel() ;
+       DefaultListModel pdf = new DefaultListModel() ;
+    
+       long idActiviteT = 0 ;
+    
+    public Statistique() {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        //this.setExtendedState(MAXIMIZED_BOTH);
+           
+         DateFormat datef = new SimpleDateFormat("dd/MM/yyyy") ;
+             Date date1 = new Date() ;
+             this.dte.setText(datef.format(date1)) ;
+             
+             
+             
+             DateFormat datef1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss") ;
+             Date date10 = new Date() ;
+             this.d1.setText(datef1.format(date10)) ;
+             this.d2.setText(datef1.format(date10)) ;
+             
+             
+             
+             
+          //
+        
+       Connection conn = null;
+       Statement stmt = null;
+       
+       try{
+      //STEP 2: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      //STEP 3: Open a connection
+     // System.out.println("Connecting to database...");
+      
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+      //STEP 4: Execute a query
+      //System.out.println("Creating statement...");
+      stmt = conn.createStatement();
+      
+      //je crai ma requete
+      
+      
+      
+         
+       String sql ;
+      
+       sql = "SELECT * FROM activite_t " ;
+      
+       ResultSet rs = stmt.executeQuery(sql) ;
+      
+      
+       while(rs.next()){
+        
+       act.addItem(rs.getString("libelle")) ; 
+      
+         
+       
+     }
+      
+    
+     
+      
+    
+            
+      //STEP 6: Clean-up environment
+      
+   // System.out.println("Goodbye!");
+      
+   
+      
+      //STEP 6: Clean-up environment
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+        
+       
+     
+     // Fin configure :
+     
+        
+        
+        //
+        
+        
+        
+        
+        
+    }
+
+    public String getUser_c() {
+        return user_c;
+    }
+
+    public void setUser_c(String user_c) {
+        this.user_c = user_c;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    
+    
+    
+    
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        act = new javax.swing.JComboBox();
+        jPanel2 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        dte = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        d1 = new javax.swing.JTextField();
+        d2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 255));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("STATISTIQUE DE PRODUCTION :");
+
+        jButton1.setText("FERMER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        act.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        act.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CHOISIR UNE ACTIVITE" }));
+        act.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton2.setText("STATISTIQUE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("       DATE /  MOIS");
+
+        jButton3.setText("IMPRIMER");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("STATISTIQUE");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("DATE 1");
+
+        jLabel6.setText("DATE 2");
+
+        jButton5.setText("IMPRIMER");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 30, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dte, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(31, 31, 31))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(d2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(d1)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dte, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(d1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(d2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("LES MATIERES PRIMAIRES :");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("LES PRODUITS FINI OBTENUS EN MOYENNE  :");
+
+        jList1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jScrollPane1.setViewportView(jList1);
+
+        jList2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jScrollPane2.setViewportView(jList2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(404, 404, 404)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(act, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(act, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        Admin1 e = new Admin1() ;
+                  
+           
+                  e.setUser_c(this.user_c) ;
+                  e.setRole(this.role) ;
+                  e.setPhone(this.phone) ;
+                  e.setLog(e.getUser_c()) ;
+        
+                  e.setVisible(true) ;
+                  
+       
+        this.setVisible(false) ;
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void actActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actActionPerformed
+        // TODO add your handling code here:
+        
+         
+        String act1 = this.act.getSelectedItem().toString().replaceAll("'", "''") ;
+        
+        if("CHOISIR UNE ACTIVITE T".equalsIgnoreCase(act1)){
+        
+            JOptionPane jp=new JOptionPane() ;
+            jp.showMessageDialog(null,"selectionner une activité T svp","Avertissement",JOptionPane.WARNING_MESSAGE);
+  
+        
+        }else{
+            
+            
+            
+              //
+            
+            
+            mtp.clear() ;
+            pdf.clear() ;
+        
+       Connection conn = null;
+       Statement stmt = null;
+       
+       try{
+      //STEP 2: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      //STEP 3: Open a connection
+     // System.out.println("Connecting to database...");
+      
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+      //STEP 4: Execute a query
+      //System.out.println("Creating statement...");
+      stmt = conn.createStatement();
+      
+      //je crai ma requete
+      
+      
+      
+         
+       String sql ;
+      
+       sql = "SELECT id FROM activite_t WHERE libelle = '"+act1+"'" ;
+      
+       ResultSet rs = stmt.executeQuery(sql) ;
+      
+      
+       while(rs.next()){
+        
+            this.idActiviteT = rs.getLong("id") ; 
+      
+         
+       
+     }
+       
+       String sql2 ;
+      
+       sql2 = "SELECT nom_matiere_pri FROM activite_t_matieres_p WHERE id_activite_t ="+this.idActiviteT ;
+      
+       ResultSet rs2 = stmt.executeQuery(sql2) ;
+      
+      
+       while(rs2.next()){
+        
+              mtp.addElement(rs2.getString("nom_matiere_pri")) ; 
+           
+           }
+      
+      String sql3 ;
+      
+       sql3 = "SELECT nom_produit_fini FROM activite_t_produit_fini WHERE id_activite_t ="+this.idActiviteT ;
+      
+       ResultSet rs3 = stmt.executeQuery(sql3) ;
+      
+      
+       while(rs3.next()){
+        
+              pdf.addElement(rs3.getString("nom_produit_fini")) ; 
+           
+           }
+      
+          jList1.setModel(mtp) ;
+          jList2.setModel(pdf) ;
+     
+      
+   
+    
+    //  End  :
+           
+    
+            
+      //STEP 6: Clean-up environment
+      
+   // System.out.println("Goodbye!");
+      
+   
+      
+      //STEP 6: Clean-up environment
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+        
+       
+     
+     // Fin configure :
+     
+        
+        
+        //
+        
+        
+        
+            
+            
+            
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_actActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        String dt = this.dte.getText().trim() ;
+        
+        if("".equalsIgnoreCase(dt) || this.idActiviteT == 0){
+            JOptionPane.showMessageDialog(this, "POUR LES STATS SAISIR UNE DATE ET UNE ACTIVITE SVP") ;
+        }else{
+              //
+            
+            mtp.clear() ;
+            pdf.clear() ;
+        
+       Connection conn = null;
+       Statement stmt = null;
+       
+       try{
+      //STEP 2: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      //STEP 3: Open a connection
+     // System.out.println("Connecting to database...");
+      
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+      //STEP 4: Execute a query
+      //System.out.println("Creating statement...");
+      stmt = conn.createStatement();
+      
+      //je crai ma requete
+      
+      
+      
+         
+       String sql ;
+      
+       sql = "SELECT * FROM transformation_t_mat_pri WHERE id_activ_t = "+this.idActiviteT+" AND status = 'fermer' AND date LIKE '%"+dt+"%'" ;
+      
+       ResultSet rs = stmt.executeQuery(sql) ;
+      
+      
+       while(rs.next()){
+        
+       this.mtp.addElement("MATIERE PRIMAIRE : "+rs.getString("matiere_p")+" "+"QTE : "+rs.getDouble("qte")+" "+"UNITE : "+rs.getString("unite")) ;
+      
+         
+       
+     }
+           
+     String sql2 ;
+      
+       sql2 = "SELECT * FROM transformation_t_produit_fini WHERE id_activ_t = "+this.idActiviteT+" AND  status = 'fermer' AND date LIKE '%"+dt+"%'" ;
+      
+       ResultSet rs2 = stmt.executeQuery(sql2) ;
+      
+      
+       while(rs2.next()){
+        
+       this.pdf.addElement("PRODUIT : "+rs2.getString("produit_fini")+" "+"OBTENU : "+rs2.getDouble("qte_obt")+" "+"UNITE : "+rs2.getString("unite")) ;
+      
+         
+       
+     }
+         
+     this.jList1.setModel(mtp) ;
+     this.jList2.setModel(pdf) ;
+      
+    
+            
+      //STEP 6: Clean-up environment
+      
+   // System.out.println("Goodbye!");
+      
+   
+      
+      //STEP 6: Clean-up environment
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+        
+       
+     
+     // Fin configure :
+     
+        
+        
+        //
+        
+        
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+        String dt1 = this.d1.getText().trim() ;
+        String dt2 = this.d2.getText().trim() ;
+        if("".equalsIgnoreCase(dt1) || "".equalsIgnoreCase(dt2) || this.idActiviteT == 0){
+            JOptionPane.showMessageDialog(this, "POUR LES STATS SAISIR LA DATE 1 ET LA DATE 2 ET UNE ACTIVITE SVP") ;
+        }else{
+              //
+            
+            mtp.clear() ;
+            pdf.clear() ;
+        
+       Connection conn = null;
+       Statement stmt = null;
+       
+       try{
+      //STEP 2: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      //STEP 3: Open a connection
+     // System.out.println("Connecting to database...");
+      
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+      //STEP 4: Execute a query
+      //System.out.println("Creating statement...");
+      stmt = conn.createStatement();
+      
+      //je crai ma requete
+      
+      
+      
+         
+       String sql ;
+      
+       sql = "SELECT * FROM transformation_t_mat_pri WHERE id_activ_t = "+this.idActiviteT+" AND  status = 'fermer' AND date BETWEEN '"+dt1+"' AND '"+dt2+"'" ;
+      
+       ResultSet rs = stmt.executeQuery(sql) ;
+      
+      
+       while(rs.next()){
+        
+       this.mtp.addElement("MATIERE PRIMAIRE : "+rs.getString("matiere_p")+" "+"QTE : "+rs.getDouble("qte")+" "+"UNITE : "+rs.getString("unite")) ;
+      
+         
+       
+     }
+           
+     String sql2 ;
+      
+       sql2 = "SELECT * FROM transformation_t_produit_fini WHERE id_activ_t = "+this.idActiviteT+" AND  status = 'fermer' AND date BETWEEN '"+dt1+"' AND '"+dt2+"'" ;
+      
+       ResultSet rs2 = stmt.executeQuery(sql2) ;
+      
+      
+       while(rs2.next()){
+        
+       this.pdf.addElement("PRODUIT : "+rs2.getString("produit_fini")+" "+"OBTENU : "+rs2.getDouble("qte_obt")+" "+"UNITE : "+rs2.getString("unite")) ;
+      
+         
+       
+     }
+         
+     this.jList1.setModel(mtp) ;
+     this.jList2.setModel(pdf) ;
+      
+    
+            
+      //STEP 6: Clean-up environment
+      
+   // System.out.println("Goodbye!");
+      
+   
+      
+      //STEP 6: Clean-up environment
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+        
+       
+     
+     // Fin configure :
+     
+        
+        
+        //
+        
+        
+        }
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        
+         String dt = this.dte.getText().trim() ;
+        
+        if("".equalsIgnoreCase(dt) || this.idActiviteT == 0){
+            JOptionPane.showMessageDialog(this, "POUR LES STATS SAISIR UNE DATE ET UNE ACTIVITE SVP") ;
+        }else{
+             
+            
+            try{
+           
+           InputStream in = new FileInputStream(new File("\\\\192.168.1.117\\sibycenter\\StatMtp.jrxml")) ;
+           JasperDesign jd = JRXmlLoader.load(in) ;
+           
+           String sql = "SELECT\n" +
+"     transformation_t_mat_pri.`id` AS transformation_t_mat_pri_id,\n" +
+"     transformation_t_mat_pri.`id_activ_t` AS transformation_t_mat_pri_id_activ_t,\n" +
+"     transformation_t_mat_pri.`matiere_p` AS transformation_t_mat_pri_matiere_p,\n" +
+"     transformation_t_mat_pri.`prx_unit_vent` AS transformation_t_mat_pri_prx_unit_vent,\n" +
+"     transformation_t_mat_pri.`qte` AS transformation_t_mat_pri_qte,\n" +
+"     transformation_t_mat_pri.`cout` AS transformation_t_mat_pri_cout,\n" +
+"     transformation_t_mat_pri.`unite` AS transformation_t_mat_pri_unite,\n" +
+"     transformation_t_mat_pri.`status` AS transformation_t_mat_pri_status,\n" +
+"     transformation_t_mat_pri.`date` AS transformation_t_mat_pri_date,\n" +
+"     transformation_t_mat_pri.`mois` AS transformation_t_mat_pri_mois,\n" +
+"     transformation_t_mat_pri.`annee` AS transformation_t_mat_pri_annee,\n" +
+"     transformation_t_mat_pri.`admin` AS transformation_t_mat_pri_admin\n" +
+"FROM\n" +
+"     `transformation_t_mat_pri` transformation_t_mat_pri WHERE id_activ_t = "+this.idActiviteT+" AND status = 'fermer' AND date LIKE '%"+dt+"%'" ;
+           
+           JRDesignQuery newQuery = new JRDesignQuery() ;
+           newQuery.setText(sql) ;
+           jd.setQuery(newQuery) ;
+           JasperReport jr = JasperCompileManager.compileReport(jd) ;
+           HashMap para = new HashMap() ;
+           JasperPrint j = JasperFillManager.fillReport(jr, para, DriverManager.getConnection(DB_URL,USER,PASS)) ;
+           JasperViewer.viewReport(j , false) ;
+          
+            //  si besoin :
+           
+               File f = new File("E:\\reports") ;
+           
+                if(f.exists()){
+                  if(f.setWritable(true)){
+                 
+                    
+                   OutputStream os = new FileOutputStream(f) ;
+                                    
+                    JasperExportManager.exportReportToPdfStream(j, os) ;
+                  
+                     os.flush();
+                     os.close() ;
+                   
+                   JOptionPane.showMessageDialog(null, "Enregistrement terminer avec succes") ;
+           
+                
+                }
+              
+              }
+
+           
+           //
+           
+           
+           
+       }catch(Exception e){
+       
+           JOptionPane.showMessageDialog(null, e) ;
+           System.out.println(e) ;
+       
+       }
+        
+        
+            
+            
+            try{
+           
+           InputStream in = new FileInputStream(new File("\\\\192.168.1.117\\sibycenter\\StatProduit.jrxml")) ;
+           JasperDesign jd = JRXmlLoader.load(in) ;
+           
+           String sql = "SELECT\n" +
+"     transformation_t_produit_fini.`id` AS transformation_t_produit_fini_id,\n" +
+"     transformation_t_produit_fini.`id_activ_t` AS transformation_t_produit_fini_id_activ_t,\n" +
+"     transformation_t_produit_fini.`produit_fini` AS transformation_t_produit_fini_produit_fini,\n" +
+"     transformation_t_produit_fini.`prx_unit_vent` AS transformation_t_produit_fini_prx_unit_vent,\n" +
+"     transformation_t_produit_fini.`qte_obt` AS transformation_t_produit_fini_qte_obt,\n" +
+"     transformation_t_produit_fini.`unite` AS transformation_t_produit_fini_unite,\n" +
+"     transformation_t_produit_fini.`status` AS transformation_t_produit_fini_status,\n" +
+"     transformation_t_produit_fini.`date` AS transformation_t_produit_fini_date,\n" +
+"     transformation_t_produit_fini.`mois` AS transformation_t_produit_fini_mois,\n" +
+"     transformation_t_produit_fini.`annee` AS transformation_t_produit_fini_annee,\n" +
+"     transformation_t_produit_fini.`admin` AS transformation_t_produit_fini_admin\n" +
+"FROM\n" +
+"     `transformation_t_produit_fini` transformation_t_produit_fini WHERE id_activ_t = "+this.idActiviteT+" AND  status = 'fermer' AND date LIKE '%"+dt+"%'" ;
+           
+           JRDesignQuery newQuery = new JRDesignQuery() ;
+           newQuery.setText(sql) ;
+           jd.setQuery(newQuery) ;
+           JasperReport jr = JasperCompileManager.compileReport(jd) ;
+           HashMap para = new HashMap() ;
+           JasperPrint j = JasperFillManager.fillReport(jr, para, DriverManager.getConnection(DB_URL,USER,PASS)) ;
+           JasperViewer.viewReport(j , false) ;
+          
+            //  si besoin :
+           
+               File f = new File("E:\\reports") ;
+           
+                if(f.exists()){
+                  if(f.setWritable(true)){
+                 
+                    
+                   OutputStream os = new FileOutputStream(f) ;
+                                    
+                    JasperExportManager.exportReportToPdfStream(j, os) ;
+                  
+                     os.flush();
+                     os.close() ;
+                   
+                   JOptionPane.showMessageDialog(null, "Enregistrement terminer avec succes") ;
+           
+                
+                }
+              
+              }
+
+           
+           //
+           
+           
+           
+       }catch(Exception e){
+       
+           JOptionPane.showMessageDialog(null, e) ;
+           System.out.println(e) ;
+       
+       }
+        
+        
+            
+        }
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+          String dt1 = this.d1.getText().trim() ;
+        String dt2 = this.d2.getText().trim() ;
+        if("".equalsIgnoreCase(dt1) || "".equalsIgnoreCase(dt2) || this.idActiviteT == 0){
+            JOptionPane.showMessageDialog(this, "POUR LES STATS SAISIR LA DATE 1 ET LA DATE 2 ET UNE ACTIVITE SVP") ;
+        }else{
+              //
+        
+            
+               try{
+           
+           InputStream in = new FileInputStream(new File("\\\\192.168.1.117\\sibycenter\\StatMtp.jrxml")) ;
+           JasperDesign jd = JRXmlLoader.load(in) ;
+           
+           String sql = "SELECT\n" +
+"     transformation_t_mat_pri.`id` AS transformation_t_mat_pri_id,\n" +
+"     transformation_t_mat_pri.`id_activ_t` AS transformation_t_mat_pri_id_activ_t,\n" +
+"     transformation_t_mat_pri.`matiere_p` AS transformation_t_mat_pri_matiere_p,\n" +
+"     transformation_t_mat_pri.`prx_unit_vent` AS transformation_t_mat_pri_prx_unit_vent,\n" +
+"     transformation_t_mat_pri.`qte` AS transformation_t_mat_pri_qte,\n" +
+"     transformation_t_mat_pri.`cout` AS transformation_t_mat_pri_cout,\n" +
+"     transformation_t_mat_pri.`unite` AS transformation_t_mat_pri_unite,\n" +
+"     transformation_t_mat_pri.`status` AS transformation_t_mat_pri_status,\n" +
+"     transformation_t_mat_pri.`date` AS transformation_t_mat_pri_date,\n" +
+"     transformation_t_mat_pri.`mois` AS transformation_t_mat_pri_mois,\n" +
+"     transformation_t_mat_pri.`annee` AS transformation_t_mat_pri_annee,\n" +
+"     transformation_t_mat_pri.`admin` AS transformation_t_mat_pri_admin\n" +
+"FROM\n" +
+"     `transformation_t_mat_pri` transformation_t_mat_pri WHERE id_activ_t = "+this.idActiviteT+" AND  status = 'fermer' AND date BETWEEN '"+dt1+"' AND '"+dt2+"'" ;
+           
+           JRDesignQuery newQuery = new JRDesignQuery() ;
+           newQuery.setText(sql) ;
+           jd.setQuery(newQuery) ;
+           JasperReport jr = JasperCompileManager.compileReport(jd) ;
+           HashMap para = new HashMap() ;
+           JasperPrint j = JasperFillManager.fillReport(jr, para, DriverManager.getConnection(DB_URL,USER,PASS)) ;
+           JasperViewer.viewReport(j , false) ;
+          
+            //  si besoin :
+           
+               File f = new File("E:\\reports") ;
+           
+                if(f.exists()){
+                  if(f.setWritable(true)){
+                 
+                    
+                   OutputStream os = new FileOutputStream(f) ;
+                                    
+                    JasperExportManager.exportReportToPdfStream(j, os) ;
+                  
+                     os.flush();
+                     os.close() ;
+                   
+                   JOptionPane.showMessageDialog(null, "Enregistrement terminer avec succes") ;
+           
+                
+                }
+              
+              }
+
+           
+           //
+           
+           
+           
+       }catch(Exception e){
+       
+           JOptionPane.showMessageDialog(null, e) ;
+           System.out.println(e) ;
+       
+       }
+        
+        
+            
+            
+            try{
+           
+           InputStream in = new FileInputStream(new File("\\\\192.168.1.117\\sibycenter\\StatProduit.jrxml")) ;
+           JasperDesign jd = JRXmlLoader.load(in) ;
+           
+           String sql = "SELECT\n" +
+"     transformation_t_produit_fini.`id` AS transformation_t_produit_fini_id,\n" +
+"     transformation_t_produit_fini.`id_activ_t` AS transformation_t_produit_fini_id_activ_t,\n" +
+"     transformation_t_produit_fini.`produit_fini` AS transformation_t_produit_fini_produit_fini,\n" +
+"     transformation_t_produit_fini.`prx_unit_vent` AS transformation_t_produit_fini_prx_unit_vent,\n" +
+"     transformation_t_produit_fini.`qte_obt` AS transformation_t_produit_fini_qte_obt,\n" +
+"     transformation_t_produit_fini.`unite` AS transformation_t_produit_fini_unite,\n" +
+"     transformation_t_produit_fini.`status` AS transformation_t_produit_fini_status,\n" +
+"     transformation_t_produit_fini.`date` AS transformation_t_produit_fini_date,\n" +
+"     transformation_t_produit_fini.`mois` AS transformation_t_produit_fini_mois,\n" +
+"     transformation_t_produit_fini.`annee` AS transformation_t_produit_fini_annee,\n" +
+"     transformation_t_produit_fini.`admin` AS transformation_t_produit_fini_admin\n" +
+"FROM\n" +
+"     `transformation_t_produit_fini` transformation_t_produit_fini WHERE id_activ_t = "+this.idActiviteT+" AND  status = 'fermer' AND date BETWEEN '"+dt1+"' AND '"+dt2+"'" ;
+           
+           JRDesignQuery newQuery = new JRDesignQuery() ;
+           newQuery.setText(sql) ;
+           jd.setQuery(newQuery) ;
+           JasperReport jr = JasperCompileManager.compileReport(jd) ;
+           HashMap para = new HashMap() ;
+           JasperPrint j = JasperFillManager.fillReport(jr, para, DriverManager.getConnection(DB_URL,USER,PASS)) ;
+           JasperViewer.viewReport(j , false) ;
+          
+            //  si besoin :
+           
+               File f = new File("E:\\reports") ;
+           
+                if(f.exists()){
+                  if(f.setWritable(true)){
+                 
+                    
+                   OutputStream os = new FileOutputStream(f) ;
+                                    
+                    JasperExportManager.exportReportToPdfStream(j, os) ;
+                  
+                     os.flush();
+                     os.close() ;
+                   
+                   JOptionPane.showMessageDialog(null, "Enregistrement terminer avec succes") ;
+           
+                
+                }
+              
+              }
+
+           
+           //
+           
+           
+           
+       }catch(Exception e){
+       
+           JOptionPane.showMessageDialog(null, e) ;
+           System.out.println(e) ;
+       
+       }
+        
+        
+        }
+        
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Statistique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Statistique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Statistique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Statistique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Statistique().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox act;
+    private javax.swing.JTextField d1;
+    private javax.swing.JTextField d2;
+    private javax.swing.JTextField dte;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JList jList1;
+    private javax.swing.JList jList2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    // End of variables declaration//GEN-END:variables
+}

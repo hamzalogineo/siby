@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Fournisseurs" table="fournisseurs" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="entreprise" type="string">
+            <column name="entreprise" />
+        </property>
+        <property name="tel1" type="string">
+            <column name="tel1" length="50" />
+        </property>
+        <property name="tel2" type="string">
+            <column name="tel2" length="50" />
+        </property>
+        <property name="nomCourt" type="string">
+            <column name="nom_court" length="100" />
+        </property>
+        <property name="service" type="string">
+            <column name="service" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <property name="adresse" type="string">
+            <column name="adresse" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" />
+        </property>
+        <property name="datecreat" type="string">
+            <column name="datecreat" length="50" />
+        </property>
+        <property name="admin" type="string">
+            <column name="admin" />
+        </property>
+    </class>
+</hibernate-mapping>

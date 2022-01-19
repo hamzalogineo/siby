@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cumulsvente2_sousFamille" language="groovy" pageWidth="572" pageHeight="752" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="52255d62-a51c-41eb-a677-b6d22fabf298">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="param_famille" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\HAMZA\\Desktop\\SIBY ARS FINALE V2\\UtpaSibyCenter\\src\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT id, sf, desi, SUM(qte) as qte, pa, pv, SUM(mu) as mu, n
+FROM cumulvente 
+WHERE (f LIKE $P{param_famille})
+GROUP BY sf, desi]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sf" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qte" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pa" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pv" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mu" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="n" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="total_profit_var" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[($F{mu} * $F{qte})]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="31">
+			<staticText>
+				<reportElement x="6" y="8" width="69" height="20" uuid="42e0c382-d04b-4e65-a0ba-a5fcd6c5515e"/>
+				<text><![CDATA[Sous Famille : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="7" width="43" height="20" uuid="6f0ebbae-8eec-4a45-8ace-80c791b19c3d"/>
+				<text><![CDATA[Qte.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="6" width="69" height="20" uuid="281bc9b9-b962-4816-9030-8c7b3967d871"/>
+				<text><![CDATA[Prix d' Achat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="6" width="72" height="20" uuid="b55fbfb2-8c17-4e0c-a30d-33ac6ea05354"/>
+				<text><![CDATA[Prix de Vente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="6" width="72" height="20" uuid="38258f7e-4584-4964-9c81-99cef3d8e18e"/>
+				<text><![CDATA[Marge Unitaire]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="79" y="7" width="92" height="20" uuid="f0c9a5dd-2111-4719-b939-cc9d98b94eac"/>
+				<textFieldExpression><![CDATA[$F{sf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="476" y="6" width="73" height="20" uuid="63b9a874-e66d-45b4-bbfc-e911c5afb7b1"/>
+				<text><![CDATA[Profit]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<textField>
+				<reportElement x="4" y="3" width="66" height="20" uuid="e20eaf33-d32f-410d-895e-2b0a6b6833cf"/>
+				<textFieldExpression><![CDATA[$F{n}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="3" width="92" height="20" uuid="706153f3-b589-496c-a3c3-1925232ad261"/>
+				<textFieldExpression><![CDATA[$F{desi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="199" y="3" width="43" height="20" uuid="c10b46c7-2913-436c-a7f4-9ef4acbb0216"/>
+				<textFieldExpression><![CDATA[$F{qte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="2" width="69" height="20" uuid="076c78f5-7300-429f-88a4-8883a2cf9a00"/>
+				<textFieldExpression><![CDATA[$F{pa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="325" y="2" width="72" height="20" uuid="d7f9f620-a672-44c4-9688-18de9530dc04"/>
+				<textFieldExpression><![CDATA[$F{pv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="2" width="72" height="20" uuid="aeb32cfa-28d8-4dec-9af2-8367391048b6"/>
+				<textFieldExpression><![CDATA[$F{mu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="2" width="75" height="20" uuid="52edbbb0-ee48-43a4-b703-b20175a61723"/>
+				<textFieldExpression><![CDATA[$F{mu} * $F{qte}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="27">
+			<staticText>
+				<reportElement x="367" y="3" width="69" height="20" uuid="475a2784-2ef8-4e9d-bec6-3a1a1a12af52"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="446" y="3" width="98" height="20" uuid="5bfc6c57-d4f4-46e0-bd2a-c676a2571fb7"/>
+				<textFieldExpression><![CDATA[$V{total_profit_var}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

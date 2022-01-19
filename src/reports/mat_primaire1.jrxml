@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="20a71f01-cbff-4b72-8c92-57d4253a3925">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="22"/>
+	<property name="ireport.y" value="77"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     matieres_p.`id` AS matieres_p_id,
+     matieres_p.`id_f` AS matieres_p_id_f,
+     matieres_p.`code_barre` AS matieres_p_code_barre,
+     matieres_p.`libelle` AS matieres_p_libelle,
+     matieres_p.`description` AS matieres_p_description,
+     matieres_p.`unite_mesure` AS matieres_p_unite_mesure,
+     matieres_p.`prx_a_unite` AS matieres_p_prx_a_unite,
+     matieres_p.`date_exp` AS matieres_p_date_exp,
+     matieres_p.`condition_livraison` AS matieres_p_condition_livraison,
+     matieres_p.`conservation` AS matieres_p_conservation,
+     matieres_p.`prx_achat` AS matieres_p_prx_achat,
+     matieres_p.`qte_achat` AS matieres_p_qte_achat,
+     matieres_p.`prx_v_unite` AS matieres_p_prx_v_unite,
+     matieres_p.`datecreat` AS matieres_p_datecreat,
+     matieres_p.`admin` AS matieres_p_admin,
+     matieres_p.`stockMini` AS matieres_p_stockMini
+FROM
+     `matieres_p` matieres_p]]>
+	</queryString>
+	<field name="matieres_p_id" class="java.lang.Long"/>
+	<field name="matieres_p_code_barre" class="java.lang.String"/>
+	<field name="matieres_p_description" class="java.lang.String"/>
+	<field name="matieres_p_prx_a_unite" class="java.lang.Long"/>
+	<field name="matieres_p_prx_v_unite" class="java.lang.Long"/>
+	<field name="matieres_p_condition_livraison" class="java.lang.String"/>
+	<field name="matieres_p_conservation" class="java.lang.String"/>
+	<variable name="spa" class="java.lang.Long" resetType="Group" resetGroup="matieres_p_conservation" calculation="Sum">
+		<variableExpression><![CDATA[$F{matieres_p_prx_a_unite}]]></variableExpression>
+	</variable>
+	<variable name="spv" class="java.lang.Long" resetType="Group" resetGroup="matieres_p_conservation" calculation="Sum">
+		<variableExpression><![CDATA[$F{matieres_p_prx_v_unite}]]></variableExpression>
+	</variable>
+	<variable name="fpa" class="java.lang.Long" resetType="Group" resetGroup="matieres_p_condition_livraison" calculation="Sum">
+		<variableExpression><![CDATA[$F{matieres_p_prx_a_unite}]]></variableExpression>
+	</variable>
+	<variable name="fpv" class="java.lang.Long" resetType="Group" resetGroup="matieres_p_condition_livraison" calculation="Sum">
+		<variableExpression><![CDATA[$F{matieres_p_prx_v_unite}]]></variableExpression>
+	</variable>
+	<variable name="tpa" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{matieres_p_prx_a_unite}]]></variableExpression>
+	</variable>
+	<variable name="tpv" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{matieres_p_prx_v_unite}]]></variableExpression>
+	</variable>
+	<group name="matieres_p_condition_livraison">
+		<groupExpression><![CDATA[$F{matieres_p_condition_livraison}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="7" width="555" height="24" forecolor="#B89F7D" backcolor="#000000" uuid="3deea4d1-4e8b-45d8-8276-812e98179646"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="24" forecolor="#FFFFFF" uuid="b5e70111-d406-4932-9f22-279652b157de"/>
+						<textElement>
+							<font isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Famille : "+$F{matieres_p_condition_livraison}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="26">
+				<staticText>
+					<reportElement x="27" y="0" width="271" height="20" uuid="c9495fcf-798b-45cd-9dd6-5701d2274550"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Total de P.A et P.V par famille :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="410" y="6" width="71" height="20" uuid="bba97c5d-973f-49a2-a9d0-d7f30dde64ed"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{fpa}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="486" y="6" width="69" height="20" uuid="74459f06-9b17-414c-a1e3-e174a211814d"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{fpv}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="matieres_p_conservation">
+		<groupExpression><![CDATA[$F{matieres_p_conservation}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement positionType="Float" x="39" y="4" width="516" height="26" forecolor="#000000" uuid="bf20ef2c-4755-4334-afae-70de9a0853dc"/>
+					<textElement>
+						<font fontName="Times New Roman" size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Sous Famille : "+$F{matieres_p_conservation}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="33">
+				<staticText>
+					<reportElement x="109" y="10" width="295" height="20" uuid="a5b82322-ffa7-4cd8-94ef-ac107f5d523b"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sous Total de P.A et P.V par sous famille :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="410" y="10" width="71" height="20" uuid="e224bdf4-b1a8-4f82-a640-7bbe10c2e923"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{spa}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="486" y="10" width="69" height="20" uuid="fd8b05f0-c0b3-44de-b0eb-e28a2ad65b90"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{spv}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="63" width="89" height="15" uuid="ac6a8cbc-914d-4fdc-8832-20da4c177ced"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tél.: 20 22 18 82]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="50" width="89" height="13" uuid="05a7d9ac-0673-4ccc-a079-46d5e08835eb"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[BD MOHAMED VI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="23" width="248" height="31" uuid="bb8836ff-fa53-4b94-95a9-8c772572919f"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LES MATIERES PRIMAIRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="10" width="89" height="13" uuid="a5dc9452-e3ce-4dc3-9e14-70245f0a4bef"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIBY CENTER ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="23" width="63" height="30" uuid="8dbe28ca-be45-4f7a-add9-55f77e202f27"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ARS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="36" width="89" height="14" uuid="a719202d-55f9-4e2d-95ef-2bee6b965fc4"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[DJICORONI PARA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="23" width="89" height="13" uuid="ab20fead-66b5-4f22-8ac1-9966401eb646"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[SUPER MARCHE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="65" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="74" y="37" width="123" height="28" forecolor="#000000" uuid="0365f8b4-7e7f-4b4b-bb88-7741ab0de505"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code barre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="2" y="37" width="72" height="28" forecolor="#000000" uuid="1b54383a-e980-4af5-a08e-31c2f3a9646f"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ref.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="481" y="37" width="74" height="28" forecolor="#000000" uuid="cca26b19-329e-443d-a3d9-d8e110cd0753"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prix vente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="404" y="37" width="77" height="28" forecolor="#000000" uuid="f638c4ba-9c2b-4f98-aa2b-aae8218ae02f"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prix achat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="197" y="37" width="207" height="28" forecolor="#000000" uuid="c2242956-22f6-4344-a899-1b2a47c4e420"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="427" y="0" width="80" height="20" uuid="1126ec34-3783-4368-8dbf-7633da11ff90"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="507" y="0" width="42" height="20" uuid="2628d8cc-9f54-491a-ba9c-2a8d5163e536"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="201" y="0" width="215" height="20" uuid="ec1bbec5-386c-44e5-a789-cf2530b122ab"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="127" y="0" width="74" height="20" uuid="f1c5c320-b56d-4b79-b37b-82df3bbd81ba"/>
+				<text><![CDATA[EDITE LE :]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="6bbed7e0-8b5d-4936-8c11-b4438aa40b21"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="10" y="0" width="64" height="18" uuid="f1b47153-de4c-42c6-be3b-b73094b57c24"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matieres_p_id}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="74" y="0" width="123" height="18" uuid="e3773f45-b008-406e-a29d-8341f15ed48b"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matieres_p_code_barre}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="197" y="0" width="207" height="18" uuid="1bb2806e-a2a9-41f2-b9f4-766e56ca52df"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matieres_p_description}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="410" y="0" width="71" height="18" uuid="3bbf37a3-df5a-4e45-952c-26979129285c"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matieres_p_prx_a_unite}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="486" y="0" width="69" height="18" uuid="c4da6f1e-41af-4cc1-b7ba-00fab32b82bf"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{matieres_p_prx_v_unite}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="32" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="21b54136-1b17-4b7b-b82b-0351d0e5b254"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="205" y="4" width="205" height="20" uuid="18f6b5a7-5a5e-42a6-bf12-7cd8b7d5cdd5"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Total global de P.A et P.V :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="410" y="4" width="71" height="20" uuid="2e9bf75f-6f5c-4131-80e4-879bf660ba33"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tpa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="4" width="69" height="20" uuid="4eda1743-7423-46a3-9fe4-9323ad91e95e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tpv}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

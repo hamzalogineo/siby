@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Facturef" table="facturef" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="n" type="java.lang.Integer">
+            <column name="n" />
+        </property>
+        <property name="cl" type="string">
+            <column name="cl" />
+        </property>
+        <property name="dtc" type="string">
+            <column name="dtc" length="50" />
+        </property>
+        <property name="montant" type="java.lang.Long">
+            <column name="montant" />
+        </property>
+        <property name="util" type="string">
+            <column name="util" />
+        </property>
+        <property name="remise" type="java.lang.Integer">
+            <column name="remise" />
+        </property>
+        <property name="mttr" type="java.lang.Long">
+            <column name="mttr" />
+        </property>
+        <property name="reliqat" type="java.lang.Long">
+            <column name="reliqat" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="2" />
+        </property>
+    </class>
+</hibernate-mapping>

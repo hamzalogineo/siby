@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Factures" table="factures" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="idClient" type="java.lang.Integer">
+            <column name="id_client" />
+        </property>
+        <property name="produitMatiere" type="string">
+            <column name="produit_matiere" />
+        </property>
+        <property name="prxUnite" type="java.lang.Double">
+            <column name="prx_unite" precision="22" scale="0" />
+        </property>
+        <property name="qteAchat" type="java.lang.Double">
+            <column name="qte_achat" precision="22" scale="0" />
+        </property>
+        <property name="montant" type="java.lang.Double">
+            <column name="montant" precision="22" scale="0" />
+        </property>
+        <property name="remise" type="java.lang.Double">
+            <column name="remise" precision="22" scale="0" />
+        </property>
+        <property name="recu" type="java.lang.Double">
+            <column name="recu" precision="22" scale="0" />
+        </property>
+        <property name="reliquat" type="java.lang.Double">
+            <column name="reliquat" precision="22" scale="0" />
+        </property>
+        <property name="dette" type="string">
+            <column name="dette" length="50" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="50" />
+        </property>
+        <property name="date" type="string">
+            <column name="date" length="50" />
+        </property>
+        <property name="mois" type="string">
+            <column name="mois" length="50" />
+        </property>
+        <property name="annee" type="string">
+            <column name="annee" length="50" />
+        </property>
+        <property name="admin" type="string">
+            <column name="admin" />
+        </property>
+    </class>
+</hibernate-mapping>

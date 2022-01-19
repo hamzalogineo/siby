@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d0ef54b9-3ff3-4151-9ffd-1c9c171c1c75">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     cumulvente.`id` AS cumulvente_id,
+     cumulvente.`f` AS cumulvente_f,
+     cumulvente.`sf` AS cumulvente_sf,
+     cumulvente.`idpro` AS cumulvente_idpro,
+     cumulvente.`desi` AS cumulvente_desi,
+     cumulvente.`qte` AS cumulvente_qte,
+     cumulvente.`pa` AS cumulvente_pa,
+     cumulvente.`pv` AS cumulvente_pv,
+     cumulvente.`mu` AS cumulvente_mu,
+     cumulvente.`profil` AS cumulvente_profil,
+     cumulvente.`admin` AS cumulvente_admin,
+     cumulvente.`n` AS cumulvente_n,
+     cumulvente.`periode` AS cumulvente_periode,
+     cumulvente.`cl` AS cumulvente_cl , sum(cumulvente.`qte`) AS qt
+FROM
+     `cumulvente` cumulvente where  cumulvente.`desi` = 'beure']]>
+	</queryString>
+	<field name="cumulvente_id" class="java.lang.Long"/>
+	<field name="cumulvente_f" class="java.lang.String"/>
+	<field name="cumulvente_sf" class="java.lang.String"/>
+	<field name="cumulvente_idpro" class="java.lang.Long"/>
+	<field name="cumulvente_desi" class="java.lang.String"/>
+	<field name="cumulvente_qte" class="java.lang.Long"/>
+	<field name="cumulvente_pa" class="java.lang.Long"/>
+	<field name="cumulvente_pv" class="java.lang.Long"/>
+	<field name="cumulvente_mu" class="java.lang.Long"/>
+	<field name="cumulvente_profil" class="java.lang.Long"/>
+	<field name="cumulvente_admin" class="java.lang.String"/>
+	<field name="cumulvente_n" class="java.lang.Integer"/>
+	<field name="cumulvente_periode" class="java.sql.Timestamp"/>
+	<field name="cumulvente_cl" class="java.lang.String"/>
+	<field name="qt" class="java.lang.Long"/>
+	<variable name="psf" class="java.lang.Long" resetType="Group" resetGroup="cumulvente_sf" calculation="Sum">
+		<variableExpression><![CDATA[$F{cumulvente_profil}]]></variableExpression>
+	</variable>
+	<variable name="pf" class="java.lang.Long" resetType="Group" resetGroup="cumulvente_f" calculation="Sum">
+		<variableExpression><![CDATA[$F{cumulvente_profil}]]></variableExpression>
+	</variable>
+	<variable name="tp" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{cumulvente_profil}]]></variableExpression>
+	</variable>
+	<group name="cumulvente_f">
+		<groupExpression><![CDATA[$F{cumulvente_f}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="7" width="555" height="24" forecolor="#B89F7D" backcolor="#000000" uuid="8dd4ea40-211a-403b-b874-abb85388c037"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="24" forecolor="#FFFFFF" uuid="95dccf06-025f-4cbc-9605-fd1b20c4d46d"/>
+						<textElement>
+							<font isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{cumulvente_f}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<textField>
+					<reportElement x="307" y="10" width="107" height="20" uuid="f292ce73-aaa5-46d6-ac74-95e062d3d1cc"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{pf}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="cumulvente_sf">
+		<groupExpression><![CDATA[$F{cumulvente_sf}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement positionType="Float" x="0" y="4" width="555" height="26" forecolor="#000000" uuid="2477a38f-07c1-499e-b2ac-a6800607c800"/>
+					<textElement>
+						<font fontName="Times New Roman" size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cumulvente_sf}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="42">
+				<textField>
+					<reportElement x="306" y="19" width="108" height="20" uuid="06ee79c3-ba85-49d2-851d-c9ba008c0412"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{psf}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="95" backcolor="#000000" uuid="e3ec2651-bb04-4d2d-bbed-c721cc226811"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="78016bb3-371e-4b83-808c-462ead81f6eb"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cherry Title]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="157" y="66" width="249" height="29" uuid="cba63a9a-e4bf-45e5-aee9-045ce2dfe0cc"/>
+					<textElement>
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Cherry SubTitle]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="553" height="32" forecolor="#000000" backcolor="#CC0000" uuid="fd6bc73e-2e2c-4102-a318-f900a73e99f7"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="307" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="4b94452a-bf2b-4ebb-9686-14b37d73dc18"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="7" width="69" height="18" forecolor="#000000" uuid="93b4a9e2-9833-4396-9cb2-cb288f40262f"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[cumulvente_idpro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="69" y="7" width="69" height="18" forecolor="#000000" uuid="58f353af-4654-49fa-9ee5-998340d69df4"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[cumulvente_desi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="207" y="7" width="69" height="18" forecolor="#000000" uuid="42713346-c948-4e2f-a3b6-e97351a634ca"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[cumulvente_pa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="276" y="7" width="69" height="18" forecolor="#000000" uuid="5a0f1e7e-b553-4006-9ef3-056fc73390ea"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[cumulvente_pv]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="345" y="7" width="69" height="18" forecolor="#000000" uuid="f6412cf7-380a-406e-8f8d-d5dfea096d9c"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[cumulvente_mu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="414" y="7" width="69" height="18" forecolor="#000000" uuid="e4ba8943-d6e7-4ac3-8247-1a5599ca86fb"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[cumulvente_profil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="483" y="7" width="69" height="18" forecolor="#000000" uuid="f49f04e5-32a8-446e-a28e-b7106adda17e"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[cumulvente_periode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="138" y="7" width="69" height="18" forecolor="#000000" uuid="0ae1719d-d2a6-4dab-a70a-917cf0b268a3"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[cumulvente_qte]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="3b036331-0e33-4901-8209-7adad8f4238f"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="69" height="18" uuid="d9d49be6-7383-40ca-987f-c9aba05dda74"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cumulvente_idpro}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="69" y="0" width="69" height="18" uuid="d6b08e59-fbb0-4d19-ae61-e69677dd927c"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cumulvente_desi}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="207" y="0" width="69" height="18" uuid="768cf502-5944-48c0-aef3-cc8cd2ee831b"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cumulvente_pa}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="276" y="0" width="69" height="18" uuid="ff3802f5-e204-4a34-9f1c-4e04fe4e20b6"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cumulvente_pv}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="345" y="0" width="69" height="18" uuid="37d2ccce-aca4-4d49-91b6-58ef123910bb"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cumulvente_mu}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="414" y="0" width="69" height="18" uuid="ca377599-3eec-486b-ba91-e781536a886e"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cumulvente_profil}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="483" y="0" width="69" height="18" uuid="976f02ad-ef86-4d63-ba37-38e9ac018402"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cumulvente_periode}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="138" y="0" width="69" height="18" uuid="51741984-4125-463e-91b9-4f4b877f49f3"/>
+					<textFieldExpression><![CDATA[$F{qt}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="31" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="2fdf981b-d099-4726-a6b9-8299900ea178"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="307" y="4" width="107" height="20" uuid="d5e4ac01-eb7b-419c-a9c6-fed2bb216563"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

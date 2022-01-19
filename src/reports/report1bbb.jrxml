@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3a4fa805-a299-4b77-8a13-4987b52f1834">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\HAMZA\\Desktop\\SIBY ARS FINALE V2.5\\UtpaSibyCenter\\src\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     prod.`id` AS prod_id,
+     prod.`nom` AS prod_nom,
+     prod.`n` AS prod_n,
+     prod.`status` AS prod_status,
+     prod.`admin` AS prod_admin,
+     prod.`dep` AS prod_dep,
+     prod.`rec` AS prod_rec,
+     prod.`profil` AS prod_profil,
+     prod.`dtec` AS prod_dtec,
+     prod.`dtef` AS prod_dtef,
+     prod.`nb` AS prod_nb,
+     prod.`grouper` AS prod_grouper
+FROM
+     `prod` prod]]>
+	</queryString>
+	<field name="prod_nom" class="java.lang.String"/>
+	<field name="prod_n" class="java.lang.Integer"/>
+	<field name="prod_dtec" class="java.sql.Timestamp"/>
+	<field name="prod_dep" class="java.lang.Long"/>
+	<field name="prod_rec" class="java.lang.Long"/>
+	<field name="prod_profil" class="java.lang.Long"/>
+	<field name="prod_grouper" class="java.lang.String"/>
+	<group name="prod_grouper">
+		<groupExpression><![CDATA[$F{prod_grouper}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="237" y="31" width="100" height="20" uuid="77ae3549-cd4e-489d-b135-f33768b076eb"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<subreport>
+				<reportElement x="28" y="12" width="478" height="100" uuid="daacdb65-9352-49d2-9f5a-1a24be723e2b"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "report1bbb_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

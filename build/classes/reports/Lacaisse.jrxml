@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e8bc94e2-a3ed-4a12-8f06-d0f9765a9edd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     factures.`id` AS factures_id,
+     factures.`id_client` AS factures_id_client,
+     factures.`produit_matiere` AS factures_produit_matiere,
+     factures.`prx_unite` AS factures_prx_unite,
+     factures.`qte_achat` AS factures_qte_achat,
+     factures.`montant` AS factures_montant,
+     factures.`remise` AS factures_remise,
+     factures.`recu` AS factures_recu,
+     factures.`reliquat` AS factures_reliquat,
+     factures.`dette` AS factures_dette,
+     factures.`type` AS factures_type,
+     factures.`date` AS factures_date,
+     factures.`mois` AS factures_mois,
+     factures.`annee` AS factures_annee,
+     factures.`admin` AS factures_admin
+FROM
+     `factures` factures]]>
+	</queryString>
+	<field name="factures_id_client" class="java.lang.Integer"/>
+	<field name="factures_produit_matiere" class="java.lang.String"/>
+	<field name="factures_prx_unite" class="java.lang.Double"/>
+	<field name="factures_qte_achat" class="java.lang.Double"/>
+	<field name="factures_montant" class="java.lang.Double"/>
+	<field name="factures_recu" class="java.lang.Double"/>
+	<variable name="to" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{factures_montant}]]></variableExpression>
+	</variable>
+	<variable name="py" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{factures_recu}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="95" backcolor="#000000" uuid="14518470-533b-4e8a-952d-651c39ac59db"/>
+				<staticText>
+					<reportElement style="Title" x="148" y="0" width="336" height="66" uuid="efd52214-83b1-422e-a780-05ed3a978b2a"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[LA CAISSE :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="199" y="66" width="207" height="29" uuid="504ca46c-0e62-4ee5-b38d-83c2f876c449"/>
+					<textElement>
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[SIBY - CENTER]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="555" height="32" forecolor="#000000" backcolor="#CC0000" uuid="568342e0-eb2b-4d89-96be-70e5e2cb521a"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="307" y="12" width="226" height="20" forecolor="#FFFFFF" uuid="8191aaf2-36d0-43a8-aff1-4dc285bda559"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="7" width="92" height="18" forecolor="#000000" uuid="f19457f4-e3aa-468d-ad14-b1cbdd078df2"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[ID CLIENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="103" y="7" width="112" height="18" forecolor="#000000" uuid="d7332713-635c-45ea-8d3d-6d24b8e42a5f"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[DESIGNATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="226" y="7" width="92" height="18" forecolor="#000000" uuid="f4d10b27-555a-49b9-899b-3b89586e86a9"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[P.U]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="341" y="7" width="92" height="18" forecolor="#000000" uuid="82fb9d0d-d38a-4f86-99d2-44aea103f8ad"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[QTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="450" y="7" width="102" height="18" forecolor="#000000" uuid="d87f66f0-44e6-45df-ae2e-15d39585a180"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[MTT]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="712a4d4e-623c-496c-ba91-a1c1f9ff095d"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="92" height="18" uuid="eb73bebb-3776-41ba-99db-d4e9f96cb672"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{factures_id_client}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="226" y="0" width="92" height="18" uuid="8a958368-4635-4a85-a970-27f51dcf7be3"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{factures_prx_unite}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="450" y="0" width="102" height="18" uuid="9ccabb00-008c-4b18-bb6b-35cc66fc1a90"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{factures_montant}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="341" y="0" width="92" height="18" uuid="08881226-9100-45b2-82da-f74e24afff5a"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{factures_qte_achat}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="103" y="0" width="112" height="18" uuid="30fa88bc-d10c-451a-a118-c60418420ec1"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{factures_produit_matiere}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="78" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="f5f50b0e-d3cb-4b2c-ab7b-d53bdf71ff75"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="2" y="24" width="115" height="20" uuid="d3c2f0a4-2f69-4288-9cc8-11d18b1bf816"/>
+				<text><![CDATA[TOTAL ARTICLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="128" y="24" width="87" height="20" uuid="1d565658-7b15-4e71-8839-0672ce3aaef2"/>
+				<text><![CDATA[MTT RECU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="24" width="87" height="20" uuid="35ef0f8d-7ab8-4b77-9924-05b2d654f3ab"/>
+				<text><![CDATA[TOTAL DETTE]]></text>
+			</staticText>
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="328" y="58" width="224" height="20" uuid="85c45ce1-7611-4c48-bd83-364d84e3f1d1"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="44" width="115" height="20" uuid="07193235-b71e-47e5-9b72-0df8e0fcd31d"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{to}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="128" y="44" width="87" height="20" uuid="f16d5611-5750-4a6c-bca7-c911189685d1"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{py}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="43" width="87" height="20" uuid="de7396f7-d48a-4cde-923a-c106e9211570"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{to} - $V{py}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="a1cb64bf-5b66-42b8-a546-c96c2ad505cf"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="683d5f21-f1b0-42c2-8cd5-77433f4cb5dd"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="7e9b8528-ab59-491f-8593-196ac13df8e1"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

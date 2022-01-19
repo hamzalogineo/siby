@@ -1,0 +1,815 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package frontend;
+
+import static frontend.CumulProdMp.JDBC_DRIVER;
+import static frontend.ProduitFini.DB_URL;
+import static frontend.VenteArticles.JDBC_DRIVER;
+import java.awt.Color;
+import java.awt.Font;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JRDesignQueryChunk;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
+/**
+ *
+ * @author HAMZA
+ */
+public class CaisseFinal extends javax.swing.JFrame {
+
+      static final String JDBC_DRIVER = "com.mysql.jdbc.Driver" ;  
+      static final String DB_URL = "jdbc:mysql://192.168.1.117:3306/transformation" ;
+      static final String USER = "root" ;
+      static final String PASS = "interco" ;
+      
+      
+      String n1;
+      String n2;
+      
+      
+    public CaisseFinal() {
+        initComponents() ;
+        this.setLocationRelativeTo(null) ;
+        
+         Date jour = new Date() ;
+        this.jDateChooser1.setDate(jour);
+        this.h1.setText("00:00") ;
+        this.jDateChooser2.setDate(jour) ;
+        this.h2.setText("23:59") ;
+        
+        //
+       
+         this.jTable1.getTableHeader().setFont(new Font("Segoe UI" , Font.BOLD , 13)) ;
+            this.jTable1.getTableHeader().setOpaque(false); 
+            this.jTable1.getTableHeader().setBackground(Color.black); 
+          
+        //    this.jTable1.setBackground(Color.white);
+        
+       
+            this.jTable1.getTableHeader().setForeground(Color.white) ;
+        
+              this.jTable1.setRowHeight(25) ;
+              
+        
+             DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+             
+                  headerRenderer.setBackground(Color.green) ;
+                  headerRenderer.setForeground(Color.BLACK) ;
+                  headerRenderer.setFont(new Font("Segoe UI" , Font.BOLD , 16)) ;
+
+                  for (int i = 0; i < this.jTable1.getModel().getColumnCount(); i++) {
+                    this.jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer) ;
+                    
+             }
+        
+     //   -------------------------------------------------------------------
+        
+        
+        
+        
+        //  ---------  2è choix
+              
+        
+        
+        
+        
+       //   ---------------
+        
+        
+        //
+        
+       
+        
+     
+        
+        DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ;
+        
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        
+       //  JOptionPane.showMessageDialog(null, new JScrollPane(this.jTable1));
+        
+        dtm.setRowCount(0) ;
+        
+       
+       
+        
+    }
+
+        private void clear() {
+
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        int n = model.getRowCount();
+        for (int i = n - 1; i >= 0; --i) {
+            model.removeRow(i);
+        }
+        
+    }  
+     
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        profil = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        h1 = new javax.swing.JFormattedTextField();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        h2 = new javax.swing.JFormattedTextField();
+
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(51, 102, 255));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("CUMUL VENTE");
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "FAMILLES", "SOUS FAMILLES", "N°", "DESCRIPTION", "QTE VENDU.", "P.A", "P.U", "T P A", "T P V", "Marge T"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTable1.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(35);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(35);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(5);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(20);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(10);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(10);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(30);
+            jTable1.getColumnModel().getColumn(8).setPreferredWidth(30);
+            jTable1.getColumnModel().getColumn(9).setPreferredWidth(20);
+        }
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("TOTAL PROFIT CFA");
+
+        profil.setEditable(false);
+        profil.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton2.setText("RECHERCHER");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("DU :");
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton3.setText("IMPRIMER");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("AU :");
+
+        h1.setText("00");
+
+        h2.setText("00");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(92, 92, 92))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(h1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(profil, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(h2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(5, 5, 5))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(h1)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(h2)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(profil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(65, 65, 65))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 495, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(280, 280, 280))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+       //
+        
+       try{
+           
+         SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss") ;     
+         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd" , Locale.getDefault()) ;
+       
+        String dte1 = sdf.format(this.jDateChooser1.getDate()) ;
+        String dte2 = sdf.format(this.jDateChooser2.getDate()) ; 
+            
+            
+        this.n1 = dte1+" "+this.h1.getText() ;
+        System.out.println(this.n1) ;
+        this.n2 = dte2+" "+this.h2.getText() ;
+        
+         NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK")) ;
+     
+         Connection conn = null ;
+         Statement stmt = null ;
+       
+       try{
+      Class.forName(JDBC_DRIVER);
+      
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+      stmt = conn.createStatement();
+      
+          clear() ;
+         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel() ;
+         long pro = 0 ;
+         
+      String sql ;
+      
+      // "FAMILLES", "SOUS FAMILLES", "N°", "DESCRIPTION", "QTE VENDU.", "P.A", "P.U", "M.U", "PROFIL"
+      
+      sql = "SELECT f , sf , idpro , desi , qte , sum(qte) , pa , pv , unite_mesure FROM cumulvente , matieres_p WHERE (cumulvente.periode BETWEEN '"+this.n1+"' AND '"+this.n2+"') "
+              + ""
+              + " AND "
+              + "  matieres_p.description = desi GROUP BY desi , f , sf "
+              + "ORDER BY f ASC , sf ASC , desi ASC " ;
+      
+       ResultSet rs = stmt.executeQuery(sql) ;
+    
+       while(rs.next()){
+        
+        if("oui".equalsIgnoreCase(rs.getString("unite_mesure"))){
+
+             dtm.addRow(new Object[]{
+            
+    // "FAMILLES", "SOUS FAMILLES", "N°", "DESCRIPTION", "QTE UTILISEE.", "P.A", "P.U", "M.U", "PROFIT"
+            
+       rs.getString("f") , rs.getString("sf")  , rs.getLong("idpro") , rs.getString("desi") , rs.getLong("sum(qte)") ,
+       rs.getLong("pa") , rs.getLong("pv") , nf3.format(Math.round((rs.getLong("sum(qte)")/1000.0) * rs.getLong("pa"))) , 
+       nf3.format(Math.round((rs.getLong("sum(qte)")/1000.0) * rs.getLong("pv"))) ,
+       nf3.format((Math.round((rs.getLong("sum(qte)")/1000.0) * rs.getLong("pv")) - Math.round((rs.getLong("sum(qte)")/1000.0) * rs.getLong("pa"))))
+          
+        });
+               
+         pro += (Math.round((rs.getLong("sum(qte)")/1000.0) * rs.getLong("pv")) - Math.round((rs.getLong("sum(qte)")/1000.0) * rs.getLong("pa"))) ;
+         
+            
+        }else{
+        dtm.addRow(new Object[]{
+            
+    // "FAMILLES", "SOUS FAMILLES", "N°", "DESCRIPTION", "QTE UTILISEE.", "P.A", "P.U", "M.U", "PROFIT"
+            
+       rs.getString("f") , rs.getString("sf")  , rs.getLong("idpro") , rs.getString("desi") , rs.getLong("sum(qte)") ,
+       rs.getLong("pa") , rs.getLong("pv") , nf3.format((rs.getLong("sum(qte)") * rs.getLong("pa"))) , 
+       nf3.format((rs.getLong("sum(qte)") * rs.getLong("pv"))) ,
+       nf3.format(((rs.getLong("sum(qte)") * rs.getLong("pv")) - (rs.getLong("sum(qte)") * rs.getLong("pa"))))
+          
+        }) ;
+               
+         pro += ((rs.getLong("sum(qte)") * rs.getLong("pv")) - (rs.getLong("sum(qte)") * rs.getLong("pa"))) ;
+         
+       }
+        
+       }
+       
+       
+       
+       // 2 è partie :
+       
+       
+       String sql10 ;
+        
+      // "FAMILLES", "SOUS FAMILLES", "N°", "DESCRIPTION", "QTE VENDU.", "P.A", "P.U", "M.U", "PROFIL"
+      
+       sql10 = "SELECT cumulvente.f , cumulvente.sf , cumulvente.idpro , cumulvente.desi , cumulvente.qte , sum(qte) , cumulvente.pa , cumulvente.pv , unite_m FROM cumulvente , produits_f WHERE (cumulvente.periode BETWEEN '"+this.n1+"' AND '"+this.n2+"') "
+              + ""
+              + " AND "
+              + "  produits_f.description = cumulvente.desi GROUP BY cumulvente.desi , cumulvente.f , cumulvente.sf "
+              + "ORDER BY cumulvente.f ASC , cumulvente.sf ASC , cumulvente.desi ASC " ;
+      
+      ResultSet rs0 = stmt.executeQuery(sql10) ;
+    
+      while(rs0.next()){
+        
+           
+           if("oui".equalsIgnoreCase(rs0.getString("unite_m"))){
+
+             dtm.addRow(new Object[]{
+            
+    // "FAMILLES", "SOUS FAMILLES", "N°", "DESCRIPTION", "QTE UTILISEE.", "P.A", "P.U", "M.U", "PROFIT"
+            
+       rs0.getString("cumulvente.f") , rs0.getString("cumulvente.sf")  , rs0.getLong("cumulvente.idpro") , rs0.getString("cumulvente.desi") , rs0.getLong("sum(qte)") ,
+       rs0.getLong("cumulvente.pa") , rs0.getLong("cumulvente.pv") , nf3.format(Math.round((rs0.getLong("sum(qte)")/1000.0) * rs0.getLong("cumulvente.pa"))) , 
+       nf3.format(Math.round((rs0.getLong("sum(qte)")/1000.0) * rs0.getLong("cumulvente.pv"))) ,
+       nf3.format((Math.round((rs0.getLong("sum(qte)")/1000.0) * rs0.getLong("cumulvente.pu")) - Math.round((rs0.getLong("sum(qte)")/1000.0) * rs0.getLong("cumulvente.pa"))))
+          
+        });
+               
+         pro += (Math.round((rs0.getLong("sum(qte)")/1000.0) * rs0.getLong("cumulvente.pv")) - Math.round((rs0.getLong("sum(qte)")/1000.0) * rs0.getLong("cumulvente.pa"))) ;
+         
+            
+        }else{
+        dtm.addRow(new Object[]{
+            
+    // "FAMILLES", "SOUS FAMILLES", "N°", "DESCRIPTION", "QTE UTILISEE.", "P.A", "P.U", "M.U", "PROFIT"
+            
+       rs0.getString("cumulvente.f") , rs0.getString("cumulvente.sf")  , rs0.getLong("cumulvente.idpro") , rs0.getString("cumulvente.desi") , rs0.getLong("sum(qte)") ,
+       rs0.getLong("cumulvente.pa") , rs0.getLong("cumulvente.pv") , nf3.format((rs0.getLong("sum(qte)") * rs0.getLong("cumulvente.pa"))) , 
+       nf3.format((rs0.getLong("sum(qte)") * rs0.getLong("cumulvente.pv"))) ,
+       nf3.format(((rs0.getLong("sum(qte)") * rs0.getLong("cumulvente.pv")) - (rs0.getLong("sum(qte)") * rs0.getLong("cumulvente.pa"))))
+          
+        });
+               
+         pro += ((rs0.getLong("sum(qte)") * rs0.getLong("cumulvente.pv")) - (rs0.getLong("sum(qte)") * rs0.getLong("cumulvente.pa"))) ;
+         
+        }
+        
+        }
+
+       
+       this.profil.setText(nf3.format(pro)) ;
+       
+       
+      rs.close() ;
+      stmt.close() ;
+      conn.close() ;    
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try 
+ 
+       }catch(Exception e){
+           
+       } 
+         
+   //
+        
+        
+          
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+     // ici moi :
+        
+           if("    -  -     ".equalsIgnoreCase(this.n1) && "    -  -     ".equalsIgnoreCase(this.n2)) {
+            JOptionPane.showMessageDialog(this, "Veuillez selectionner les deux dates svp") ;
+        } else {
+         try{
+             
+             /*    net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS); 
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE ,ResultSet.CONCUR_READ_ONLY); 
+            ResultSet resultat = statement.executeQuery("SELECT f as f, sf as sf , idpro as idpro, article as desi, sum(qte) as qte, pa as pa, pu as pv, mu as mu,sum(profil) as profil FROM prodmp WHERE dtec BETWEEN '"+this.n1+"' AND '"+this.n2+"' GROUP BY sf ORDER BY f") ;
+            
+            InputStream in = new FileInputStream(new File("\\\\192.168.1.117\\sibycenter\\cumulsventeMP.jrxml")) ;
+            
+            //InputStream in = new FileInputStream(new File("C:\\Users\\IDRIS\\Desktop\\SIBY ARS FINALE V2\\UtpaSibyCenter\\src\\reports\\cumulsvente.jrxml")) ;
+           
+            long total = 0 ;
+            long totalfinal = 0 ;
+            NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK"));
+            
+            List mlist;
+            mlist = new ArrayList<>();
+            
+            while(resultat.next()) {
+                HashMap<String, Object> m = new HashMap<>(); 
+                m.put("f", resultat.getString("f"));
+                m.put("sf", resultat.getString("sf"));
+                m.put("idpro", resultat.getInt("idpro"));  
+                m.put("desi", resultat.getString("desi"));
+                m.put("qte", resultat.getInt("qte"));
+                m.put("pa", resultat.getInt("pa"));
+                m.put("pv", resultat.getInt("pv"));
+                m.put("mu", resultat.getInt("mu"));
+                m.put("profil", resultat.getInt("profil"));
+                total = resultat.getInt("profil");
+                m.put("total", nf3.format(total));
+                totalfinal += total;
+                m.put("totalfinal", nf3.format(totalfinal));
+                mlist.add(m);
+                
+                
+                m.put("du", this.n1) ;
+                m.put("au", this.n2) ;
+                
+            }
+            
+            JRBeanCollectionDataSource jrbean = new JRBeanCollectionDataSource(mlist);
+            
+            Map<String, Object> para = new HashMap<>();
+            para.put("sql", jrbean);
+            
+            JasperReport report = JasperCompileManager.compileReport(in);
+            JasperPrint print = JasperFillManager.fillReport(report, para, jrbean);
+            JasperViewer.viewReport(print , false);
+             
+             */
+             
+             
+              
+          // pour nous :
+             
+             
+             
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS); 
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE ,ResultSet.CONCUR_READ_ONLY);
+            Statement statement1 = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE ,ResultSet.CONCUR_READ_ONLY);
+            
+            ResultSet rs = statement.executeQuery("SELECT f , sf , idpro , desi , qte , sum(qte) , pa , pv , unite_mesure FROM cumulvente , matieres_p WHERE (cumulvente.periode BETWEEN '"+this.n1+"' AND '"+this.n2+"') "
+              + ""
+              + " AND "
+              + "  matieres_p.description = desi GROUP BY f , sf , desi "
+              + "ORDER BY f ASC , sf ASC , desi ASC ") ;
+            
+            
+             ResultSet rs2 = statement1.executeQuery("SELECT cumulvente.f , cumulvente.sf , cumulvente.idpro , cumulvente.desi , cumulvente.qte , sum(qte) , cumulvente.pa , cumulvente.pv , unite_m FROM cumulvente , produits_f WHERE (cumulvente.periode BETWEEN '"+this.n1+"' AND '"+this.n2+"') "
+              + ""
+              + " AND "
+              + "  produits_f.description = cumulvente.desi GROUP BY cumulvente.f , cumulvente.sf , cumulvente.desi "
+              + "ORDER BY cumulvente.f ASC , cumulvente.sf ASC , cumulvente.desi ASC ") ;
+            
+            
+            InputStream in = new FileInputStream(new File("\\\\192.168.1.117\\sibycenter\\cumulyaya01.jrxml")) ;
+            
+            
+            //InputStream in = new FileInputStream(new File("D:\\SOFT-TECH\\SIBY\\UtpaSibyCenter\\src\\reports\\venteArticles.jrxml")) ;
+            
+            long total = 0 ;
+            
+            
+            List mlist;
+            mlist = new ArrayList<>();
+            
+            while(rs.next()){
+                
+                
+               
+                if("oui".equalsIgnoreCase(rs.getString("unite_mesure"))){
+                      
+                    HashMap<String, Object> m = new HashMap<>();
+                    
+                    
+                     
+                    m.put("idpro", rs.getLong("idpro"));
+                    m.put("article", rs.getString("desi"));
+                    m.put("qte", rs.getLong("sum(qte)"));
+                    m.put("pa", rs.getLong("pa"));
+                    m.put("pu", rs.getLong("pv"));
+                    m.put("f", rs.getString("f"));
+                    m.put("sf", rs.getString("sf"));
+                    m.put("tpa", Math.round(((rs.getLong("sum(qte)")/1000.0) * rs.getLong("pa"))));
+                    m.put("tpv", Math.round(((rs.getLong("sum(qte)")/1000.0) * rs.getLong("pv"))));
+                    m.put("marget", (Math.round((rs.getLong("sum(qte)")/1000.0) * rs.getLong("pv")) - Math.round((rs.getLong("sum(qte)")/1000.0) * rs.getLong("pa"))));
+                   
+                    
+                  
+                     
+                    mlist.add(m) ;
+                    
+                    
+            
+        }else{
+                    
+                    HashMap<String, Object> m = new HashMap<>(); 
+                    
+                    m.put("idpro", rs.getLong("idpro"));
+                    m.put("article", rs.getString("desi"));
+                    m.put("qte", rs.getLong("sum(qte)"));
+                    m.put("pa", rs.getLong("pa"));
+                    m.put("pu", rs.getLong("pv"));
+                    m.put("f", rs.getString("f"));
+                    m.put("sf", rs.getString("sf"));
+                    m.put("tpa", (rs.getLong("sum(qte)") * rs.getLong("pa")));
+                    m.put("tpv", (rs.getLong("sum(qte)") * rs.getLong("pv")));
+                    m.put("marget", ((rs.getLong("sum(qte)") * rs.getLong("pv")) - (rs.getLong("sum(qte)") * rs.getLong("pa"))));
+                       
+                      
+                     
+                    mlist.add(m);
+                    
+      
+            }
+           
+            }
+            
+            
+            while(rs2.next()){
+                
+              
+               
+                if("oui".equalsIgnoreCase(rs2.getString("unite_m"))){
+                      
+                    HashMap<String, Object> m = new HashMap<>();
+                    
+                    
+                     
+                    m.put("idpro", rs2.getLong("cumulvente.idpro"));
+                    m.put("article", rs2.getString("cumulvente.desi"));
+                    m.put("qte", rs2.getLong("sum(qte)"));
+                    m.put("pa", rs2.getLong("cumulvente.pa"));
+                    m.put("pu", rs2.getLong("cumulvente.pv"));
+                    m.put("f", rs2.getString("cumulvente.f"));
+                    m.put("sf", rs2.getString("cumulvente.sf"));
+                    m.put("tpa", Math.round(((rs2.getLong("sum(qte)")/1000.0) * rs2.getLong("cumulvente.pa"))));
+                    m.put("tpv", Math.round(((rs2.getLong("sum(qte)")/1000.0) * rs2.getLong("cumulvente.pv"))));
+                    m.put("marget", (Math.round((rs2.getLong("sum(qte)")/1000.0) * rs2.getLong("cumulvente.pv")) - Math.round((rs2.getLong("sum(qte)")/1000.0) * rs2.getLong("cumulvente.pa"))));
+                   
+                    
+                  
+                     
+                    mlist.add(m) ;
+                    
+                    
+            
+        }else{
+                    
+                    HashMap<String, Object> m = new HashMap<>(); 
+                    
+                    m.put("idpro", rs2.getLong("cumulvente.idpro"));
+                    m.put("article", rs2.getString("cumulvente.desi"));
+                    m.put("qte", rs2.getLong("sum(qte)"));
+                    m.put("pa", rs2.getLong("cumulvente.pa"));
+                    m.put("pu", rs2.getLong("cumulvente.pv"));
+                    m.put("f", rs2.getString("cumulvente.f"));
+                    m.put("sf", rs2.getString("cumulvente.sf"));
+                    m.put("tpa", (rs2.getLong("sum(qte)") * rs2.getLong("cumulvente.pa")));
+                    m.put("tpv", (rs2.getLong("sum(qte)") * rs2.getLong("cumulvente.pv")));
+                    m.put("marget", ((rs2.getLong("sum(qte)") * rs2.getLong("cumulvente.pv")) - (rs2.getLong("sum(qte)") * rs2.getLong("cumulvente.pa"))));
+                       
+                      
+                     
+                    mlist.add(m);
+                    
+      
+            }
+           
+            }
+            
+            
+            
+            JRBeanCollectionDataSource jrbean = new JRBeanCollectionDataSource(mlist);
+            
+            Map<String, Object> para = new HashMap<>();
+            para.put("data", jrbean);
+            
+         // para.put("user", this.admin);
+            
+           
+            para.put("du", this.n1) ;
+            para.put("au", this.n2) ;
+            para.put("producteur", " ") ;
+            para.put("cumul", "PRODUITS VENDUS") ;
+            
+            JasperReport report = JasperCompileManager.compileReport(in);
+            JasperPrint print = JasperFillManager.fillReport(report, para,   jrbean) ; // new JREmptyDataSource());
+            JasperViewer.viewReport(print, false) ;
+            
+          //  JasperPrintManager.printReport(print, false) ;
+            
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, e) ;
+           System.out.println(e) ;
+       }   
+        }
+           
+        // end pour nous :
+           
+      //  end :
+             
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(CaisseFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(CaisseFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(CaisseFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(CaisseFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CaisseFinal().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField h1;
+    private javax.swing.JFormattedTextField h2;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField profil;
+    // End of variables declaration//GEN-END:variables
+}
+
+

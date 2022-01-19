@@ -1,0 +1,293 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package frontend;
+
+import static frontend.ConsultModelGateau.JDBC_DRIVER;
+import java.awt.Color;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author HAMZA
+ */
+public class Detail_Panier_Gt extends javax.swing.JFrame {
+
+      static final String JDBC_DRIVER = "com.mysql.jdbc.Driver" ;  
+      static final String DB_URL = "jdbc:mysql://192.168.1.117:3306/transformation" ;
+      static final String USER = "root" ;
+      static final String PASS = "interco" ;
+      
+    
+    Integer cb ;
+    public Detail_Panier_Gt() {
+        initComponents();
+    }
+    
+     public Detail_Panier_Gt(Integer cb) {
+        initComponents();
+        this.setLocationRelativeTo(null) ;
+        this.cb = cb ;
+        
+          this.jTable1.getTableHeader().setFont(new Font("Segoe UI" , Font.BOLD , 13)) ;
+            this.jTable1.getTableHeader().setOpaque(false); 
+            this.jTable1.getTableHeader().setBackground(Color.black); 
+          
+        //    this.jTable1.setBackground(Color.white);
+        
+       
+            this.jTable1.getTableHeader().setForeground(Color.white) ;
+        
+            this.jTable1.setRowHeight(25) ;
+              
+        
+             DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+             
+                  headerRenderer.setBackground(Color.green) ;
+                  headerRenderer.setForeground(Color.BLACK) ;
+                  headerRenderer.setFont(new Font("Segoe UI" , Font.BOLD , 16)) ;
+
+                  for (int i = 0; i < this.jTable1.getModel().getColumnCount(); i++) {
+                    this.jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer) ;
+                    
+             }
+        
+     //   -------------------------------------------------------------------
+        
+        
+        
+        
+        //  ---------  2è choix
+              
+        
+        
+        
+        
+       //   ---------------
+        
+        
+        //
+        
+       
+        
+     
+        
+        DefaultTableModel dtm1 = (DefaultTableModel) this.jTable1.getModel() ;
+        
+        
+        
+       //  JOptionPane.showMessageDialog(null, new JScrollPane(this.jTable1));
+        
+        dtm1.setRowCount(0) ;
+        
+        
+                                  Connection conn = null ;
+                                  Statement stmt = null ;
+
+        try{
+
+            // STEP 2: Register JDBC driver :
+            Class.forName(JDBC_DRIVER) ;
+
+            //STEP 3: Open a connection
+            // System.out.println("Connecting to database...");
+
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            // STEP 4: Execute a query
+            // System.out.println("Creating statement...") ;
+
+            stmt = conn.createStatement() ;
+
+            // je crai ma requete
+
+            String sql = null ;
+            ResultSet rs = null ;
+            
+          
+
+            sql =  "select * from detail_model_gt where cb = "+this.cb ;
+
+            rs = stmt.executeQuery(sql) ;
+
+            while(rs.next()){
+
+                dtm1.addRow(new Object[]{
+
+                    //  "DESCRIPTION / OPTION", "DIMENSION", "PRIX DE BASE", "OBSERVATION"
+
+       rs.getString("description").toUpperCase(), rs.getString("dimension").toUpperCase() ,rs.getInt("prx") , rs.getString("observation").toUpperCase()
+
+                }) ;
+
+                // System.out.print(" LE code patient est Systematique "+cp.getText()) ;
+
+            }
+
+            //STEP 6: Clean-up environment
+
+            // System.out.println("Goodbye!");
+
+            //STEP 6: Clean-up environment
+            rs.close();
+            stmt.close();
+            conn.close();
+
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+                  
+        
+        
+        
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DETAIL DU GATEAU PERSONNALISE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "DESCRIPTION", "DIMENSION", "PRIX", "OBSERVATION"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(350);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(350);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(350);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(80);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(80);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(80);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(80);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(80);
+        }
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(148, 148, 148))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Detail_Panier_Gt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Detail_Panier_Gt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Detail_Panier_Gt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Detail_Panier_Gt.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Detail_Panier_Gt().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    // End of variables declaration//GEN-END:variables
+}

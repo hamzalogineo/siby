@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Stock2" table="stock2" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="f" type="string">
+            <column name="f" />
+        </property>
+        <property name="sf" type="string">
+            <column name="sf" />
+        </property>
+        <property name="cb" type="string">
+            <column name="cb" />
+        </property>
+        <property name="desi" type="string">
+            <column name="desi" />
+        </property>
+        <property name="pa" type="java.lang.Long">
+            <column name="pa" />
+        </property>
+        <property name="pv" type="java.lang.Long">
+            <column name="pv" />
+        </property>
+        <property name="qteet" type="java.lang.Long">
+            <column name="qteet" />
+        </property>
+        <property name="qtest" type="java.lang.Long">
+            <column name="qtest" />
+        </property>
+        <property name="stock" type="java.lang.Long">
+            <column name="stock" />
+        </property>
+        <property name="four" type="string">
+            <column name="four" />
+        </property>
+        <property name="maga" type="string">
+            <column name="maga" />
+        </property>
+        <property name="admin" type="string">
+            <column name="admin" />
+        </property>
+        <property name="datec" type="date">
+            <column name="datec" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

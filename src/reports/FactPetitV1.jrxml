@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="250" pageHeight="400" columnWidth="15" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="74c06f95-f44d-4cdd-89d5-8f649bf512f4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     factures.`id` AS factures_id,
+     factures.`id_client` AS factures_id_client,
+     factures.`produit_matiere` AS factures_produit_matiere,
+     factures.`prx_unite` AS factures_prx_unite,
+     factures.`qte_achat` AS factures_qte_achat,
+     factures.`montant` AS factures_montant,
+     factures.`remise` AS factures_remise,
+     factures.`recu` AS factures_recu,
+     factures.`reliquat` AS factures_reliquat,
+     factures.`dette` AS factures_dette,
+     factures.`type` AS factures_type,
+     factures.`date` AS factures_date,
+     factures.`mois` AS factures_mois,
+     factures.`annee` AS factures_annee,
+     factures.`admin` AS factures_admin,
+     clients.`id` AS clients_id,
+     clients.`entreprise` AS clients_entreprise,
+     clients.`nom_court` AS clients_nom_court,
+     clients.`adresse` AS clients_adresse,
+     clients.`tel1` AS clients_tel1,
+     clients.`tel2` AS clients_tel2,
+     clients.`email` AS clients_email,
+     clients.`fonction` AS clients_fonction,
+     clients.`description` AS clients_description,
+     clients.`plafon_credit` AS clients_plafon_credit,
+     clients.`datecreat` AS clients_datecreat,
+     clients.`admin` AS clients_admin
+FROM
+     `factures` factures,
+     `clients` clients]]>
+	</queryString>
+	<field name="factures_produit_matiere" class="java.lang.String"/>
+	<field name="factures_prx_unite" class="java.lang.Double"/>
+	<field name="factures_qte_achat" class="java.lang.Double"/>
+	<field name="factures_montant" class="java.lang.Double"/>
+	<field name="factures_remise" class="java.lang.Double"/>
+	<field name="factures_recu" class="java.lang.Double"/>
+	<field name="factures_date" class="java.lang.String"/>
+	<field name="factures_admin" class="java.lang.String"/>
+	<field name="clients_entreprise" class="java.lang.String"/>
+	<field name="clients_tel1" class="java.lang.String"/>
+	<variable name="to1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{factures_montant}]]></variableExpression>
+	</variable>
+	<variable name="remi1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{factures_remise}]]></variableExpression>
+	</variable>
+	<variable name="rc1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{factures_recu}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="55" y="8" width="122" height="20" uuid="2d98d0c5-311e-46a2-ab8c-cdbbc3ee23b1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIBY - CENTER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="28" width="208" height="20" uuid="3dc0a54a-fb99-40fb-b927-a34e4c548976"/>
+				<text><![CDATA[DJICORONI PARA BD MOHAMED VI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="48" width="122" height="20" uuid="79d60b44-a610-4f6d-8bb5-8f5e401a867d"/>
+				<text><![CDATA[TEL  : 20 22 18 82]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="5" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="0" width="190" height="20" uuid="aedabd03-d6fc-4da3-bab4-c2af8511af7d"/>
+				<textFieldExpression><![CDATA["Client :"+" "+$F{clients_entreprise}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="20" width="190" height="20" uuid="4be79332-9141-40d2-8526-f8bd9947fb40"/>
+				<textFieldExpression><![CDATA["Contact :"+" "+$F{clients_tel1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="84" height="20" uuid="0cba50b3-7718-41fe-abfb-d1877cd6fc60"/>
+				<text><![CDATA[DESIGNATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="40" width="51" height="20" uuid="dce2886e-4f4c-45eb-b13e-e48257cb4174"/>
+				<text><![CDATA[P.U]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="40" width="53" height="20" uuid="29ce439f-6e7d-4546-b6be-5399b9150877"/>
+				<text><![CDATA[QTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="40" width="42" height="20" uuid="4e0e05ef-8fd4-4c5c-8f4a-5652e01517a8"/>
+				<text><![CDATA[M.T.T]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="5" width="84" height="20" uuid="ed2424eb-3100-4d34-a942-b6c313d7ce9c"/>
+				<textFieldExpression><![CDATA[$F{factures_produit_matiere}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="5" width="51" height="20" uuid="39643b4d-7756-4c10-ac80-3d14cc377448"/>
+				<textFieldExpression><![CDATA[$F{factures_prx_unite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="5" width="53" height="20" uuid="bc2cfa24-460d-4d68-86d9-82c0db8ad01c"/>
+				<textFieldExpression><![CDATA[$F{factures_qte_achat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="5" width="42" height="20" uuid="ef3336f6-101d-4a16-ab89-c1227d6a817e"/>
+				<textFieldExpression><![CDATA[$F{factures_montant}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="11" width="84" height="20" uuid="8e44ed36-eb24-43b9-bb5a-5f470579cbfd"/>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="11" width="67" height="20" uuid="ec6d7bc2-2bce-4b27-bf5b-b1c4e6d84599"/>
+				<text><![CDATA[REMISE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="11" width="65" height="20" uuid="ecad1162-081a-4053-87a0-d55c550a1663"/>
+				<text><![CDATA[RECU]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="28" width="84" height="20" uuid="c94a2119-cfd9-47d7-9b9c-e07ac6d7adf1"/>
+				<textFieldExpression><![CDATA[$V{to1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="28" width="56" height="20" uuid="64b88267-133e-4a9e-808f-614bdf1e92bc"/>
+				<textFieldExpression><![CDATA[$V{remi1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="31" width="65" height="20" uuid="47875d73-781f-48a2-a4c1-b8d37cb3ac82"/>
+				<textFieldExpression><![CDATA[$V{rc1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="42" splitType="Stretch">
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="0" y="20" width="135" height="20" uuid="202aaa41-43c9-48a8-b11c-3d968d7f86eb"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="145" y="0" width="85" height="20" uuid="679c8f81-c41a-4eeb-b7ec-802bd13d6ab4"/>
+				<text><![CDATA[LA CAISSE :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="135" y="20" width="95" height="20" uuid="8060e451-e0e7-4317-93aa-84d0ecaa0869"/>
+				<textFieldExpression><![CDATA[$F{factures_admin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="4" splitType="Stretch"/>
+	</summary>
+</jasperReport>

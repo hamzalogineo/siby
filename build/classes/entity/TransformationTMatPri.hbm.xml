@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 mai 2019 18:05:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.TransformationTMatPri" table="transformation_t_mat_pri" catalog="transformation" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="idActivT" type="java.lang.Long">
+            <column name="id_activ_t" />
+        </property>
+        <property name="matiereP" type="string">
+            <column name="matiere_p" />
+        </property>
+        <property name="prxUnitVent" type="java.lang.Double">
+            <column name="prx_unit_vent" precision="22" scale="0" />
+        </property>
+        <property name="qte" type="java.lang.Double">
+            <column name="qte" precision="22" scale="0" />
+        </property>
+        <property name="cout" type="java.lang.Double">
+            <column name="cout" precision="22" scale="0" />
+        </property>
+        <property name="unite" type="string">
+            <column name="unite" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="50" />
+        </property>
+        <property name="date" type="string">
+            <column name="date" length="50" />
+        </property>
+        <property name="mois" type="string">
+            <column name="mois" length="50" />
+        </property>
+        <property name="annee" type="string">
+            <column name="annee" length="50" />
+        </property>
+        <property name="admin" type="string">
+            <column name="admin" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,828 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package frontend;
+
+import static frontend.ActiviteTransformation.DB_URL;
+import static frontend.CaisseFinal.JDBC_DRIVER;
+import static frontend.CumulProdMp.JDBC_DRIVER;
+import static frontend.ProductionT.JDBC_DRIVER;
+import java.awt.Color;
+import java.awt.Font;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import static java.lang.System.in;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
+/**
+ *
+ * @author HAMZA
+ */
+public class StatistiqueFinal extends javax.swing.JFrame {
+
+    /**
+     * Creates new form StatistiqueFinal
+     */
+    
+      static final String JDBC_DRIVER = "com.mysql.jdbc.Driver" ;  
+      static final String DB_URL = "jdbc:mysql://192.168.1.117:3306/transformation" ;
+      static final String USER = "root" ;
+      static final String PASS = "interco" ;
+      
+    String n1;
+    String n2;
+    
+    public StatistiqueFinal() {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        
+        DateFormat datef = new SimpleDateFormat("yyyy-MM-dd HH:MM") ;
+        Date date = new Date() ;
+        
+         Date jour = new Date() ;
+        this.jDateChooser1.setDate(jour);
+        this.h1.setText("00:00") ;
+        this.jDateChooser2.setDate(jour) ;
+        this.h2.setText("23:59") ;
+        
+        this.jTable1.getTableHeader().setFont(new Font("Segoe UI" , Font.BOLD , 13)) ;
+            this.jTable1.getTableHeader().setOpaque(false); 
+            this.jTable1.getTableHeader().setBackground(Color.black); 
+          
+        //    this.jTable1.setBackground(Color.white);
+        
+       
+            this.jTable1.getTableHeader().setForeground(Color.white) ;
+        
+              this.jTable1.setRowHeight(25) ;
+              
+        
+             DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+             
+                  headerRenderer.setBackground(Color.green) ;
+                  headerRenderer.setForeground(Color.BLACK) ;
+                  headerRenderer.setFont(new Font("Segoe UI" , Font.BOLD , 16)) ;
+
+                  for (int i = 0; i < this.jTable1.getModel().getColumnCount(); i++) {
+                    this.jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer) ;
+                    
+             }
+        
+     //   -------------------------------------------------------------------
+        
+        
+        
+        
+        //  ---------  2è choix
+              
+        
+        
+        
+        
+       //   ---------------
+        
+        
+        //
+        
+       
+        
+     
+        
+        DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ;
+        
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        dtm.addRow(new Object[]{1,1,1,1,1,1,1,1,1,1});
+        
+       //  JOptionPane.showMessageDialog(null, new JScrollPane(this.jTable1));
+        
+        dtm.setRowCount(0) ;
+        
+    
+    }
+    
+     private void clear() {
+
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        int n = model.getRowCount();
+        for (int i = n - 1; i >= 0; --i) {
+            model.removeRow(i);
+        }
+        
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        h2 = new javax.swing.JFormattedTextField();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        h1 = new javax.swing.JFormattedTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        dep = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        rec = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        pro = new javax.swing.JTextField();
+
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(51, 102, 255));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("STATISTIQUE DE LA PRODUCTION  ");
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton2.setText("RECHERCHER");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jButton3.setText("IMPRIMER");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("DU");
+
+        jLabel7.setText("AU");
+
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+
+        h2.setText("00");
+        h2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        jDateChooser2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+
+        h1.setText("00");
+        h1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(h1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel6))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(h2)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(h1)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(h2)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "GROUPE", "N°", "PRODUCTION", "Date D", "DATE F", "DEPENSE", "RECETTE", "PROFIT"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTable1.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(1);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
+        }
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("DEPENSES :");
+
+        dep.setEditable(false);
+        dep.setText("0");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("RECETTES :");
+
+        rec.setEditable(false);
+        rec.setText("0");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("PROFITS :");
+
+        pro.setEditable(false);
+        pro.setText("0");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 913, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dep, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rec, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pro, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(rec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(dep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(384, 384, 384))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+        
+        try{
+         SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss") ;     
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd" , Locale.getDefault()) ;
+       
+        String dte1 = sdf.format(this.jDateChooser1.getDate()) ;
+        String dte2 = sdf.format(this.jDateChooser2.getDate()) ; 
+            
+            
+        this.n1 = dte1+" "+this.h1.getText() ;
+        System.out.println(this.n1) ;
+        this.n2 = dte2+" "+this.h2.getText() ;
+        
+        
+        NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK")) ;
+        
+        
+            
+            Connection conn = null;
+            Statement stmt = null;
+       
+       try{
+      Class.forName(JDBC_DRIVER); 
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+      stmt = conn.createStatement();
+      
+      long dep1 = 0 ; long rec1 = 0 ; long pro1 = 0 ;
+      
+          clear() ;
+      
+           DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel() ;
+        
+       String sql ;
+      
+       sql= "SELECT * FROM prod WHERE status = 'fermer' AND dtec BETWEEN '"+this.n1+"' AND '"+this.n2+"' AND NOT etat = 'annuler' ORDER BY grouper ASC" ;
+       
+       ResultSet rs = stmt.executeQuery(sql) ;
+      
+      
+      while(rs.next()){
+    
+      dtm.addRow(new Object[]{
+     
+     // "GROUPE", "N°", "PRODUCTION", "Date D", "DATE F", "DEPENSE", "RECETTE", "PROFIT"
+         
+          // rs.getString("grouper")  ,  
+
+       rs.getString("grouper") , rs.getInt("n") , rs.getString("nom") , sdf1.format(rs.getDate("dtec")) , sdf1.format(rs.getDate("dtef")) , nf3.format(rs.getLong("dep")) ,
+       nf3.format(rs.getLong("rec")) , nf3.format(rs.getLong("profil"))
+        
+        }) ;
+         
+         dep1 += rs.getLong("dep") ;
+         rec1 += rs.getLong("rec") ;
+         pro1 += rs.getLong("profil") ;
+         
+     
+     }
+      
+       this.dep.setText(nf3.format(dep1)) ;
+       this.rec.setText(nf3.format(rec1)) ;
+       this.pro.setText(nf3.format(pro1)) ;
+      
+      rs.close();
+      stmt.close();
+      conn.close();
+     
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+            
+       
+        
+        
+    }catch(Exception e){
+        
+             clear() ;
+      
+             dep.setText("0") ; rec.setText("0") ; pro.setText("0") ;
+            
+            JOptionPane.showMessageDialog(this, "Saisir une date svp") ;
+            
+      //    JOptionPane.showMessageDialog(this, "Choisir les deux periodes svp") ;
+
+           }
+    
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        
+        this.jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR)) ;
+        
+            /*
+            try{
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS); 
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE ,ResultSet.CONCUR_READ_ONLY); 
+            ResultSet resultat = statement.executeQuery("SELECT n as n1, nom as nom1 , dtec as dtec1, dtef as dtef1, dep as dep1, rec as rec1, profil as profil1 FROM prod WHERE status = 'fermer' AND (dtec >= '"+this.n1+"' AND dtef <= '"+this.n2+"') ORDER BY grouper ") ;
+            
+            InputStream in = new FileInputStream(new File("\\\\192.168.1.117\\sibycenter\\StateProd.jrxml")) ;
+            //InputStream in = new FileInputStream(new File("D:\\SIBY ARS FINALE V2\\UtpaSibyCenter\\src\\reports\\statisqueFinal.jrxml")) ;
+           
+            long dep1 = 0 ; long rec1 = 0 ; long pro1 = 0 ;
+            NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK"));
+            
+            List mlist;
+            mlist = new ArrayList<>();
+            
+            while(resultat.next()) {
+                HashMap<String, Object> m = new HashMap<>(); 
+                m.put("n", resultat.getInt("n1"));
+                m.put("nom", resultat.getString("nom1"));
+                m.put("dtec", resultat.getString("dtec1"));
+                m.put("dtef", resultat.getString("dtef1"));
+                m.put("dep", resultat.getInt("dep1"));
+                m.put("rec", resultat.getInt("rec1"));
+                m.put("profil", resultat.getInt("profil1"));
+                pro1 += resultat.getInt("profil1");
+                dep1 += resultat.getInt("dep1");
+                rec1 += resultat.getInt("rec1");
+                m.put("sumprofil", nf3.format(pro1));
+                m.put("sumdep", nf3.format(dep1));
+                m.put("sumrec", nf3.format(rec1));
+                mlist.add(m);
+            }
+            
+            JRBeanCollectionDataSource jrbean = new JRBeanCollectionDataSource(mlist);
+            
+            Map<String, Object> para = new HashMap<>();
+            para.put("sql", jrbean);
+            
+            JasperReport report = JasperCompileManager.compileReport(in);
+            JasperPrint print = JasperFillManager.fillReport(report, para, new JREmptyDataSource());
+            JasperViewer.viewReport(print, false);
+            
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, e) ;
+           System.out.println(e) ;
+       }
+            */
+            
+            // ici pour moi :
+            
+            
+            
+                 try{
+                 
+                 
+                   
+       
+       
+     
+            
+            
+         
+        
+                 
+                   String dep1 = this.dep.getText() ;
+                   String rec1 = this.rec.getText() ;
+                   String pro1 =  this.pro.getText() ;
+                 
+                   NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK"));
+           
+           InputStream in = new FileInputStream(new File("\\\\192.168.1.117\\sibycenter\\StateProd.jrxml")) ;
+          
+       //   InputStream in = new FileInputStream(new File("C:\\Users\\HAMZA\\Desktop\\SIBY ARS FINALE V2.5\\UtpaSibyCenter\\src\\reports\\StateProd.jrxml")) ;
+           
+           // C:\Users\HAMZA\Desktop\SIBY ARS FINALE V2.5\UtpaSibyCenter\src\reports
+           
+           JasperDesign jd = JRXmlLoader.load(in) ;
+           
+           String sql = "SELECT\n" +
+"     prod.`id` AS prod_id,\n" +
+"     prod.`nom` AS prod_nom,\n" +
+"     prod.`n` AS prod_n,\n" +
+"     prod.`status` AS prod_status,\n" +
+"     prod.`admin` AS prod_admin,\n" +
+"     prod.`dep` AS prod_dep,\n" +
+"     prod.`rec` AS prod_rec,\n" +
+"     prod.`profil` AS prod_profil,\n" +
+"     prod.`dtec` AS prod_dtec,\n" +
+"     prod.`dtef` AS prod_dtef,\n" +
+"     prod.`nb` AS prod_nb,\n" +
+"     prod.`grouper` AS prod_grouper\n" +
+" FROM\n" +
+" `prod` prod WHERE prod.`status` = 'fermer' AND prod.`dtec` BETWEEN '"+this.n1+"' AND '"+this.n2+"' AND NOT prod.`etat` = 'annuler' ORDER BY grouper" ;
+          
+           //sum(`dep`) AS dep , sum(`rec`) AS rec , sum(`profil`) AS pro 
+           
+          //   String sql2 = "SELECT sum(dep) as dep , sum(rec) as rec , sum(profil) as profit FROM prod WHERE status = 'fermer' AND dtec BETWEEN '"+this.n1+"' AND '"+this.n2+"' GROUP BY grouper ORDER BY grouper" ;
+           
+           /*
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS); 
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE ,ResultSet.CONCUR_READ_ONLY); 
+            ResultSet resultat = statement.executeQuery(sql2) ;
+            */
+           
+           JRDesignQuery newQuery = new JRDesignQuery() ;
+           newQuery.setText(sql) ;
+           jd.setQuery(newQuery) ;
+           JasperReport jr = JasperCompileManager.compileReport(jd) ;
+           
+           /*
+             HashMap<String, Object> m = new HashMap<>(); 
+           
+            while(resultat.next()) {
+                
+                m.put("dep", nf3.format(resultat.getLong("dep")));
+                m.put("rec", nf3.format(resultat.getLong("rec")));
+                m.put("profit", nf3.format(resultat.getLong("profit")));
+             
+            }
+            */
+            
+            HashMap para = new HashMap() ;
+           
+           para.put("du", this.n1) ;
+           para.put("au", this.n2) ;
+           para.put("td",  dep1) ;
+           para.put("tr",  rec1) ;
+           para.put("tp",  pro1) ;
+           
+           
+          // HashMap para = new HashMap() ;
+          // para.put("du", this.n1) ;
+          // para.put("au", this.n2) ;
+           
+           JasperPrint j = JasperFillManager.fillReport(jr, para, DriverManager.getConnection(DB_URL,USER,PASS)) ;
+           JasperViewer.viewReport(j , false) ;
+          
+            //  si besoin :
+           
+               File f = new File("E:\\reports") ;
+           
+                if(f.exists()){
+                  if(f.setWritable(true)){
+                 
+                    
+                   OutputStream os = new FileOutputStream(f) ;
+                                    
+                    JasperExportManager.exportReportToPdfStream(j, os) ;
+                  
+                     os.flush();
+                     os.close() ;
+                   
+                   JOptionPane.showMessageDialog(null, "Enregistrement terminer avec succes") ;
+           
+                
+                }
+              
+              }
+
+           
+           //
+           
+           
+                 
+                 //
+                 
+                 /*
+                 
+                     try{
+            Class.forName(JDBC_DRIVER);
+            Connection connection = DriverManager.getConnection(DB_URL,USER,PASS); 
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE ,ResultSet.CONCUR_READ_ONLY); 
+            ResultSet resultat = statement.executeQuery("SELECT n as n,nom as nom,dtec as dtec,dtef as dtef,dep as dep,rec as rec,profil as profil , grouper as grouper , sum(dep) as dep1 , sum(rec) as rec1 , sum(profil) as profit1 FROM prod WHERE status = 'fermer' AND dtec BETWEEN '"+this.n1+"' AND '"+this.n2+"' GROUP BY grouper ORDER BY grouper") ;
+            
+          //  InputStream in = new FileInputStream(new File("\\\\192.168.1.117\\sibycenter\\StateProd.jrxml")) ;
+            
+           InputStream in = new FileInputStream(new File("C:\\Users\\HAMZA\\Desktop\\SIBY ARS FINALE V2.5\\UtpaSibyCenter\\src\\reports\\StateProd.jrxml")) ;
+           
+            long td1 = 0 ;
+            long tr1 = 0 ;
+            long tp1 = 0 ;
+            
+            String dep12 = this.dep.getText() ;
+            String rec1 = this.rec.getText() ;
+            String pro1 =  this.pro.getText() ;
+            
+            // long totalfinal = 0 ;
+            
+            NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK"));
+            
+            List mlist;
+            mlist = new ArrayList<>();
+            
+            while(resultat.next()) {
+                HashMap<String, Object> m = new HashMap<>() ;
+                
+                m.put("n", resultat.getString("n"));
+                m.put("nom", resultat.getString("nom"));
+                m.put("dtec", resultat.getString("dtec"));
+                m.put("dtef", resultat.getString("dtef"));
+                m.put("dep", resultat.getLong("dep"));
+                m.put("rec", resultat.getLong("rec"));
+                m.put("profil", resultat.getLong("profil"));
+                m.put("grouper", resultat.getString("grouper")) ;
+                
+                td1 = resultat.getLong("dep1") ;
+                tr1 = resultat.getLong("rec1") ;
+                tp1 = resultat.getLong("profit1") ;
+                
+                m.put("td1", nf3.format(td1)) ;
+                m.put("tr1", nf3.format(tr1)) ;
+                m.put("tp1", nf3.format(tp1)) ;
+                
+                
+                m.put("dep12", dep12) ;
+                m.put("rec1", rec1) ;
+                m.put("pro1", pro1) ;
+             
+           
+                mlist.add(m);
+                
+                
+                m.put("du", this.n1) ;
+                m.put("au", this.n2) ;
+                
+            }
+            
+            JRBeanCollectionDataSource jrbean = new JRBeanCollectionDataSource(mlist);
+            
+            Map<String, Object> para = new HashMap<>();
+            para.put("sql", jrbean);
+            
+            JasperReport report = JasperCompileManager.compileReport(in);
+            JasperPrint print = JasperFillManager.fillReport(report, para, jrbean);
+            JasperViewer.viewReport(print , false);
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, e) ;
+           System.out.println(e) ;
+       }   
+                 
+               //
+            */     
+                 
+           
+       }catch(Exception e){
+       
+           JOptionPane.showMessageDialog(null, e) ;
+           System.out.println(e) ;
+       
+       }
+        
+            
+            this.jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)) ;
+    
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(StatistiqueFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(StatistiqueFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(StatistiqueFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(StatistiqueFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new StatistiqueFinal().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField dep;
+    private javax.swing.JFormattedTextField h1;
+    private javax.swing.JFormattedTextField h2;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField pro;
+    private javax.swing.JTextField rec;
+    // End of variables declaration//GEN-END:variables
+}

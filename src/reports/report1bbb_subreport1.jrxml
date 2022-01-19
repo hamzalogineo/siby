@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1bbb_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4dc5ddb8-de0f-4ed3-930e-dbd1ce3e8c30">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     prod.`id` AS prod_id,
+     prod.`nom` AS prod_nom,
+     prod.`n` AS prod_n,
+     prod.`status` AS prod_status,
+     prod.`admin` AS prod_admin,
+     prod.`dep` AS prod_dep,
+     prod.`rec` AS prod_rec,
+     prod.`profil` AS prod_profil,
+     prod.`dtec` AS prod_dtec,
+     prod.`dtef` AS prod_dtef,
+     prod.`nb` AS prod_nb,
+     prod.`grouper` AS prod_grouper
+FROM
+     `prod` prod]]>
+	</queryString>
+	<field name="prod_id" class="java.lang.Long"/>
+	<field name="prod_nom" class="java.lang.String"/>
+	<field name="prod_n" class="java.lang.Integer"/>
+	<field name="prod_status" class="java.lang.String"/>
+	<field name="prod_admin" class="java.lang.String"/>
+	<field name="prod_dep" class="java.lang.Long"/>
+	<field name="prod_rec" class="java.lang.Long"/>
+	<field name="prod_profil" class="java.lang.Long"/>
+	<field name="prod_dtec" class="java.sql.Timestamp"/>
+	<field name="prod_dtef" class="java.sql.Timestamp"/>
+	<field name="prod_nb" class="java.lang.Integer"/>
+	<field name="prod_grouper" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="139" y="2" width="100" height="20" uuid="b63bef9d-303b-4f9e-a58e-58bf030fab30"/>
+				<text><![CDATA[prod_nom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="363" y="2" width="100" height="20" uuid="213348cd-c3af-4d51-90fe-de1689ac6cde"/>
+				<text><![CDATA[prod_n]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="52" splitType="Stretch">
+			<textField>
+				<reportElement x="139" y="24" width="100" height="20" uuid="2bbc1e91-ed01-4a74-8636-7b2b71f37854"/>
+				<textFieldExpression><![CDATA[$F{prod_nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="32" width="100" height="20" uuid="1d95ba08-7fb1-47db-9b34-774a978681ad"/>
+				<textFieldExpression><![CDATA[$F{prod_n}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

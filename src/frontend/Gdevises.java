@@ -1,0 +1,780 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package frontend;
+
+import static frontend.OpDepot.JDBC_DRIVER;
+import java.awt.Color;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author HAMZA
+ */
+public class Gdevises extends javax.swing.JFrame {
+
+      static final String JDBC_DRIVER = "com.mysql.jdbc.Driver" ;  
+      static final String DB_URL = "jdbc:mysql://192.168.1.117:3306/transformation" ;
+      static final String USER = "root" ;
+      static final String PASS = "interco" ;
+    
+      String login ;
+      Integer id ;
+    
+    public Gdevises() {
+        initComponents();
+        this.setLocationRelativeTo(null) ;
+        
+    }
+    
+    
+    public Gdevises(String login) {
+        initComponents() ;
+        
+        this.login = login ;
+        
+        this.setLocationRelativeTo(null) ;
+        
+        this.jTable1.getTableHeader().setFont(new Font("Segoe UI" , Font.BOLD , 13)) ;
+            this.jTable1.getTableHeader().setOpaque(false); 
+            this.jTable1.getTableHeader().setBackground(Color.black); 
+          
+        //    this.jTable1.setBackground(Color.white);
+        
+       
+            this.jTable1.getTableHeader().setForeground(Color.white) ;
+        
+              this.jTable1.setRowHeight(25) ;
+              
+        
+             DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+             
+                  headerRenderer.setBackground(Color.green) ;
+                  headerRenderer.setForeground(Color.BLACK) ;
+                  headerRenderer.setFont(new Font("Segoe UI" , Font.BOLD , 16)) ;
+
+                  for (int i = 0; i < this.jTable1.getModel().getColumnCount(); i++) {
+                    this.jTable1.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer) ;
+                    
+             }
+        
+     //   -------------------------------------------------------------------
+        
+        
+        
+        
+        //  ---------  2è choix
+              
+        
+        
+        
+        
+       //   ---------------
+        
+        
+        //
+        
+       
+        
+     
+        
+        DefaultTableModel dtm1 = (DefaultTableModel) this.jTable1.getModel() ;
+        
+        
+        
+       //  JOptionPane.showMessageDialog(null, new JScrollPane(this.jTable1));
+        
+        dtm1.setRowCount(0) ;
+        
+       
+       
+          Connection conn = null ;
+          Statement stmt = null ;
+       
+       try{
+      //STEP 2: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      //STEP 3: Open a connection
+     // System.out.println("Connecting to database...");
+      
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+      //STEP 4: Execute a query
+      //System.out.println("Creating statement...");
+      stmt = conn.createStatement();
+      
+      //je crai ma requete
+      
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss") ;
+        
+        String sql ;
+      
+       sql= "SELECT * FROM devise ORDER BY dtec DESC" ;
+      
+       ResultSet rs = stmt.executeQuery(sql) ;
+      
+      
+     while(rs.next()){
+         
+         // "ID", "DEVISES", "MONNAIE CFA  ECO", "ACTIVER", "DER.MISE A J"
+         
+          dtm1.addRow(new Object[]{
+          rs.getInt("id") , rs.getString("monnaie") , rs.getLong("xe_cfa_eco") , rs.getString("type") , sdf.format(rs.getTimestamp("dtec"))
+          , rs.getString("admin"), rs.getString("type_d")
+          }) ;
+     
+     
+     }
+     
+      
+            
+      //STEP 6: Clean-up environment
+      
+   // System.out.println("Goodbye!");
+      
+   
+      
+      //STEP 6: Clean-up environment
+      rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+        
+       
+        
+        
+        
+    }
+    
+    
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        xe = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        a_v = new javax.swing.JComboBox();
+
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "DEVISES", "MONNAIE CFA  ECO", "ACTIVER", "DER.MISE A J", "UTILISATEUR", "TYPE"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTable1.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(1);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(5);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(10);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(110);
+        }
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jButton1.setText("AJOUTER");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton2.setText("MODIFIER");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton3.setText("VEILLEUSE");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CHOISIR DEVISE", "1¤", "1$" }));
+        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        xe.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        xe.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("FCFA");
+
+        a_v.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CHOISIR TYPE", "ACHAT", "VENTE" }));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(227, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(xe, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(a_v, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(153, 153, 153))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(a_v, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        String devise , monnaie , a_v ;
+               devise = this.jComboBox1.getSelectedItem().toString() ;
+               monnaie = this.xe.getText().trim() ;
+               a_v = this.a_v.getSelectedItem().toString() ;
+               
+               try{
+                   long mn = 0 ;
+                        mn = Long.parseLong(monnaie) ;
+                   
+                   if("CHOISIR DEVISE".equalsIgnoreCase(devise) || mn == 0 || "CHOISIR TYPE".equalsIgnoreCase(a_v)){
+                       JOptionPane.showMessageDialog(this, "Choisir le divise et la monnaie correcte et le type svp !!! ") ;
+                   }else{
+                       
+                       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
+                                        String date = sdf.format(new Date()) ;
+                                        
+                                        
+                                         Connection conn = null ;
+                                         Statement stmt = null ;
+       
+       try{
+      //STEP 2: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      //STEP 3: Open a connection
+     // System.out.println("Connecting to database...");
+      
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+      //STEP 4: Execute a query
+      //System.out.println("Creating statement...");
+      stmt = conn.createStatement();
+      
+      //je crai ma requete
+      
+        if(stmt.executeUpdate("insert into devise(monnaie,xe_cfa_eco,dtec,admin,type, type_d) values('"
+                +devise+"' , "+mn+" , '"+date+"' , '"+this.login.replaceAll("'", "''")+"' , 'OUI' , '"+a_v+"')") == 1){
+            
+            this.jComboBox1.setSelectedItem("CHOISIR DEVISE") ;
+            this.a_v.setSelectedItem("CHOISIR TYPE") ;
+            this.xe.setText("") ;
+            
+            DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ;
+                              dtm.setRowCount(0) ;
+                              
+     SimpleDateFormat sdfT = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss") ;
+        
+        String sql ;
+      
+       sql= "SELECT * FROM devise ORDER BY dtec DESC" ;
+      
+       ResultSet rs = stmt.executeQuery(sql) ;
+      
+      
+     while(rs.next()){
+         
+         // "ID", "DEVISES", "MONNAIE CFA  ECO", "ACTIVER", "DER.MISE A J"
+         
+          dtm.addRow(new Object[]{
+          rs.getInt("id") , rs.getString("monnaie") , rs.getLong("xe_cfa_eco") , rs.getString("type") , sdfT.format(rs.getTimestamp("dtec"))
+          , rs.getString("admin") , rs.getString("type_d")
+          }) ;
+     
+     
+     }
+     
+      
+            
+            
+                  }
+     
+            
+      //STEP 6: Clean-up environment
+      
+   // System.out.println("Goodbye!");
+      
+   
+      
+      //STEP 6: Clean-up environment
+   // rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+        
+       
+                       
+                       
+                       
+                   }
+                   
+               }catch(Exception e){
+                   JOptionPane.showMessageDialog(this, "Choisir la monnaie en chiffre uniquement !!! ");
+               }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        // TODO add your handling code here:
+        
+        this.id = 0 ;
+        
+        this.id = Integer.parseInt(this.jTable1.getValueAt(this.jTable1.getSelectedRow() , 0).toString()) ;
+        this.jComboBox1.setSelectedItem(this.jTable1.getValueAt(this.jTable1.getSelectedRow() , 1).toString()) ;
+        this.xe.setText(this.jTable1.getValueAt(this.jTable1.getSelectedRow() , 2).toString());
+        
+         this.a_v.setSelectedItem(this.jTable1.getValueAt(this.jTable1.getSelectedRow() , 6).toString()) ;
+        
+        
+    }//GEN-LAST:event_jTable1MouseReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        if(this.jTable1.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Vous devez choisir dans le tableau pour la mise à jour svp ");
+        }else{
+        
+            String devise , monnaie , a_v ;
+               devise = this.jComboBox1.getSelectedItem().toString() ;
+               monnaie = this.xe.getText().trim() ;
+               a_v = this.a_v.getSelectedItem().toString() ;
+               
+               try{
+                   long mn = 0 ;
+                        mn = Long.parseLong(monnaie) ;
+                   
+                   if("CHOISIR DEVISE".equalsIgnoreCase(devise) || mn == 0 || "CHOISIR TYPE".equalsIgnoreCase(a_v)){
+                       JOptionPane.showMessageDialog(this, "Choisir le divise et la monnaie correcte svp !!! ") ;
+                   }else{
+                       
+                       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
+                                        String date = sdf.format(new Date()) ;
+                                        
+                                        
+                                         Connection conn = null ;
+                                         Statement stmt = null ;
+       
+       try{
+      //STEP 2: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      //STEP 3: Open a connection
+     // System.out.println("Connecting to database...");
+      
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+      //STEP 4: Execute a query
+      //System.out.println("Creating statement...");
+      stmt = conn.createStatement();
+      
+      //je crai ma requete
+      
+        if(stmt.executeUpdate("update devise set monnaie = '"+devise+"' , xe_cfa_eco = "+mn+" , dtec = '"+date+"' , admin = '"+this.login.replaceAll("'", "''")+"' "
+                + ", type_d = '"+a_v+"' where id = "+this.id ) == 1){
+            
+            this.jComboBox1.setSelectedItem("CHOISIR DEVISE") ;
+            this.xe.setText("") ;
+            
+            DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ;
+                              dtm.setRowCount(0) ;
+                              
+     SimpleDateFormat sdfT = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss") ;
+        
+        String sql ;
+      
+       sql= "SELECT * FROM devise ORDER BY dtec DESC" ;
+      
+       ResultSet rs = stmt.executeQuery(sql) ;
+      
+      
+     while(rs.next()){
+         
+         // "ID", "DEVISES", "MONNAIE CFA  ECO", "ACTIVER", "DER.MISE A J"
+         
+          dtm.addRow(new Object[]{
+          rs.getInt("id") , rs.getString("monnaie") , rs.getLong("xe_cfa_eco") , rs.getString("type") , sdfT.format(rs.getTimestamp("dtec"))
+          , rs.getString("admin"), rs.getString("type_d")
+          }) ;
+     
+     
+     }
+     
+      
+            
+            
+                  }
+     
+            
+      //STEP 6: Clean-up environment
+      
+   // System.out.println("Goodbye!");
+      
+   
+      
+      //STEP 6: Clean-up environment
+   // rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+        
+       
+                       
+                       
+                       
+                   }
+                   
+               }catch(Exception e){
+                   JOptionPane.showMessageDialog(this, "Choisir la monnaie en chiffre uniquement !!! ");
+               }
+        
+            
+        }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        
+         if(this.jTable1.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Vous devez choisir dans le tableau pour la mise à jour svp ");
+        }else{
+        
+             String devise , monnaie ;
+               devise = this.jComboBox1.getSelectedItem().toString() ;
+               monnaie = this.xe.getText().trim() ;
+               
+               try{
+                   long mn = 0 ;
+                        mn = Long.parseLong(monnaie) ;
+                   
+                   if("CHOISIR DEVISE".equalsIgnoreCase(devise) || mn == 0){
+                       JOptionPane.showMessageDialog(this, "Choisir le divise et la monnaie correcte svp !!! ") ;
+                   }else{
+                       
+                       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
+                                        String date = sdf.format(new Date()) ;
+                                        
+                                        
+                                         Connection conn = null ;
+                                         Statement stmt = null ;
+       
+       try{
+      //STEP 2: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      //STEP 3: Open a connection
+     // System.out.println("Connecting to database...");
+      
+      conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+      //STEP 4: Execute a query
+      //System.out.println("Creating statement...");
+      stmt = conn.createStatement();
+      
+      //je crai ma requete
+      
+        if(stmt.executeUpdate("update devise set admin = '"+this.login.replaceAll("'", "''")+"' , type = 'NON' where id = "+this.id) == 1){
+            
+            this.jComboBox1.setSelectedItem("CHOISIR DEVISE") ;
+            this.xe.setText("") ;
+            
+            DefaultTableModel dtm = (DefaultTableModel) this.jTable1.getModel() ;
+                              dtm.setRowCount(0) ;
+                              
+     SimpleDateFormat sdfT = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss") ;
+        
+        String sql ;
+      
+       sql= "SELECT * FROM devise ORDER BY dtec DESC" ;
+      
+       ResultSet rs = stmt.executeQuery(sql) ;
+      
+      
+     while(rs.next()){
+         
+         // "ID", "DEVISES", "MONNAIE CFA  ECO", "ACTIVER", "DER.MISE A J"
+         
+          dtm.addRow(new Object[]{
+          rs.getInt("id") , rs.getString("monnaie") , rs.getLong("xe_cfa_eco") , rs.getString("type") , sdfT.format(rs.getTimestamp("dtec"))
+          , rs.getString("admin"), rs.getString("type_d")
+          }) ;
+     
+     
+     }
+     
+      
+            
+            
+                  }
+     
+            
+      //STEP 6: Clean-up environment
+      
+   // System.out.println("Goodbye!");
+      
+   
+      
+      //STEP 6: Clean-up environment
+   // rs.close();
+      stmt.close();
+      conn.close();
+      
+      
+   }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+      //finally block used to close resources
+      try{
+         if(stmt!=null)
+            stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+         if(conn!=null)
+            conn.close();
+      }catch(SQLException se){
+         se.printStackTrace();
+      }//end finally try
+   }//end try
+        
+       
+                       
+                       
+                       
+                   }
+                   
+               }catch(Exception e){
+                   JOptionPane.showMessageDialog(this, "Choisir la monnaie en chiffre uniquement !!! ");
+               }
+        
+            
+        }
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Gdevises.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Gdevises.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Gdevises.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Gdevises.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Gdevises().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox a_v;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JFormattedTextField xe;
+    // End of variables declaration//GEN-END:variables
+}
